@@ -56,15 +56,22 @@ def do_logout():
         del session[CURR_USER_KEY]
 
 
+@app.route("/")
+def root():
+    """Render homepage at root directory."""
+
+    return render_template("base.html")
+
+
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     """Handle user signup.
 
     Create new user and add to DB. Redirect to home page.
 
-    If form not valid, present form.
+    If form not valid, re-present form.
 
-    If the there already is a user with that username: flash message
+    If there already is a user with that username: flash message
     and re-present form.
     """
 
@@ -74,22 +81,23 @@ def signup():
         try:
             user = User.signup(
                 username=form.username.data,
-                password=form.password.data,
                 email=form.email.data,
-                image_url=form.image_url.data or User.image_url.default.arg,
+                password=form.password.data,
             )
+            #signup method adds validated user model to session
             db.session.commit()
+
 
         except IntegrityError as e:
             flash("Username already taken", 'danger')
-            return render_template('users/signup.html', form=form)
+            return render_template('user/signup.html', form=form)
 
         do_login(user)
 
         return redirect("/")
 
     else:
-        return render_template('users/signup.html', form=form)
+        return render_template('user/signup.html', form=form)
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -109,26 +117,18 @@ def login():
 
         flash("Invalid credentials.", 'danger')
 
-    return render_template('users/login.html', form=form)
+    return render_template('user/login.html', form=form)
 
 
 @app.route('/logout')
 def logout():
     """Handle logout of user."""
-    #user = User.query.get(session[CURR_USER_KEY])
-    session.pop(CURR_USER_KEY)
+
+    do_logout()
     flash("User is logged out.", "success")
-    #f"{user.username} is logged out.""
+
     return redirect("/")
 
-
-
-
-@app.route("/")
-def root():
-    """Render homepage at root directory."""
-
-    return render_template("base.html")
 
 #User routes
 
