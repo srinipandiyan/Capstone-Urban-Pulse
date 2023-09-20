@@ -27,3 +27,10 @@ def root():
     """Render homepage at root directory."""
 
     return render_template("base.html")
+
+#User routes
+
+
+@app.route("/user")
+def user_profile():
+    """Display user profile"""
