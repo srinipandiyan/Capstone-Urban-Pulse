@@ -18,7 +18,7 @@ class User(db.Model):
     email = db.Column(db.Text, nullable=False, unique=True)
     password = db.Column(db.Text, nullable=False)
 
-    base_city = db.relationship("City", backref="user_base_id", uselist=False)
+    base_city = db.relationship("City", backref="user_id", uselist=False)
     favorited_cities = db.relationship("FavoritedCity", backref="user")
 
     @classmethod
