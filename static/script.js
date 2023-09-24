@@ -1,8 +1,18 @@
 const input = document.querySelector('#cities');
 const suggestions = document.querySelector('.suggestions ul');
+const submitButton = document.querySelector('#submit-button');
 
-/*
- *match characters in str to characters in elements of cities array
+const cities = [
+    "Aarhus, Denmark",
+    "Adelaide, Australia",
+    "Albuquerque, United States",
+    "Almaty",
+    "Amsterdam",
+    "Anchorage"]
+
+ /*
+ * match characters in str to characters in elements of cities array
+ * @param {string} results - filter cities array for chars in search query str
  */
 function search(str) {
 	const results = [];
@@ -65,6 +75,28 @@ function useSuggestion(e) {
 	suggestions.innerText = "";
 }
 
+//function to handle form submission
+function handleSubmit() {
+    const selectedCity = input.value;
+
+    fetch(`/search/${selectedCity}`)
+        .then(response => {
+            if (response.ok) {
+                // The response status is OK (200).
+                window.location.href = `/search/${selectedCity}`;
+                console.log("Request was successful!");
+            } else {
+                // Handle other response statuses (e.g., 404 for "Not Found").
+                console.log("Request failed with status: " + response.status);
+            }
+        })
+        .catch(error => {
+            // Handle network errors here, if needed.
+            console.error("Network error:", error);
+        });
+}
+
+
 //keyup event listener for search bar inputs
 input.addEventListener('keyup', searchHandler);
 //mouseover event listener for highlighting suggestions
@@ -73,3 +105,12 @@ suggestions.addEventListener('mouseover', toggleHighlight);
 suggestions.addEventListener('mouseout', toggleHighlight);
 //click event listener for city suggestions
 suggestions.addEventListener('click', useSuggestion);
+//click event listener for the submit button
+submitButton.addEventListener('click', handleSubmit);
+/*enter keyup event listener for search bar
+input.addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') {
+        handleSubmit();
+    }
+});
+*/

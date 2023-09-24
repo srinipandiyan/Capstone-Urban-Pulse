@@ -138,8 +138,13 @@ def user_profile():
 
 #Search routes
 
-@app.route("/search", methods=['GET', 'POST'])
-def autocomplete():
-    """Suggest cities for search functionality and get selected city for comparison"""
-    if request.method == "GET":
-        return render_template("home.html", cities=cities)
+## @app.route("/search", methods=['GET', 'POST'])
+#def autocomplete():
+   # """Suggest cities for search functionality and get selected city for comparison"""
+    #if request.method == "GET":
+    #    return render_template("home.html", cities=cities)
+
+@app.route("/search/<string:city_id>", methods=['GET'])
+def search(city_id):
+    """Comparison page for city"""
+    return render_template('city/comparison.html', city_id=city_id)
