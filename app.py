@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///urban_pulse'
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # set all to false for production/remove echo
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 # Use shell command to turn on debug mode.
 # $ export FLASK_DEBUG=1 && flask run
 toolbar = DebugToolbarExtension(app)
@@ -113,11 +113,22 @@ def login():
 
         if user:
             do_login(user)
-            return render_template('home.html')
+            return redirect('/search')
 
         flash("Invalid credentials.", 'danger')
 
     return render_template('user/login.html', form=form)
+
+@app.route('/search')
+def homepage():
+    """Homepage of Urban Pulse"""
+    if g.user:
+        #user is authenticated, render the homepage
+        return render_template('home.html')
+    else:
+        #user is not authenticated, redirect to the index
+        flash("Invalid credentials.", 'danger')
+        return redirect("/")
 
 
 @app.route('/logout')
