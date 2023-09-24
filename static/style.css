@@ -1,16 +1,20 @@
+/* 
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+/* gradient made using https://cssgradient.io */
 
-body {
-  /* gradient made using https://cssgradient.io */
+/* body {
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(17,9,121,1) 35%, rgba(0,212,255,1) 100%);
   padding: 42vh;
   display: flex;
   justify-content: center;
-}
+} 
+
+*/
 
 .search-container {
   width: 500px;

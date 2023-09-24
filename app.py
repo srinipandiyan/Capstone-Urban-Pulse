@@ -136,3 +136,4 @@ def logout():
 @app.route("/user")
 def user_profile():
     """Display user profile"""
+    
