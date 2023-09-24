@@ -1,11 +1,12 @@
 """Flask app for Urban Pulse"""
 
-from flask import Flask, render_template, request, flash, redirect, session, g, abort
+from flask import Flask, render_template, request, flash, redirect, session, g, abort, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
 from forms import UserAddForm, LoginForm
 from models import db, connect_db, User
+from urban import cities
 
 CURR_USER_KEY = "curr_user"
 
@@ -131,7 +132,14 @@ def logout():
 
 #User routes
 
-
 @app.route("/user")
 def user_profile():
     """Display user profile"""
+
+#Search routes
+
+@app.route("/search", methods=['GET', 'POST'])
+def autocomplete():
+    """Suggest cities for search functionality and get selected city for comparison"""
+    if request.method == "GET":
+        return render_template("home.html", cities=cities)
