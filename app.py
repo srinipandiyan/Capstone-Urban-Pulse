@@ -112,7 +112,6 @@ def login():
 
         if user:
             do_login(user)
-            flash(f"Hello, {user.username}!", "success")
             return render_template('home.html')
 
         flash("Invalid credentials.", 'danger')
@@ -136,4 +135,3 @@ def logout():
 @app.route("/user")
 def user_profile():
     """Display user profile"""
-    
