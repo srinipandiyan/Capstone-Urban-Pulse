@@ -359,13 +359,18 @@ function handleEnter(event) {
 
 //keyup event listener for search bar inputs
 input.addEventListener('keyup', searchHandler);
+
 //enter keyup event listener for search bar
-input.addEventListener('keyup', handleEnter);
+//input.addEventListener('keyup', handleEnter);
+
 //mouseover event listener for highlighting suggestions
 suggestions.addEventListener('mouseover', toggleHighlight);
 //mouseout event listener for unhighlighting suggestions
 suggestions.addEventListener('mouseout', toggleHighlight);
 //click event listener for city suggestions
 suggestions.addEventListener('click', useSuggestion);
+//click event for autcomplete suggestions
+suggestions.addEventListener('click', handleSubmit);
+
 //click event listener for the submit button
-submitButton.addEventListener('click', handleSubmit);
+//submitButton.addEventListener('click', handleSubmit);
