@@ -25,5 +25,5 @@ class UpdateUserForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('E-mail', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[Length(min=6)])
-    base_city = SelectField('Select Base City:', remove_option=True, coerce=int)
-    occupation = SelectField('Select Occupation:', remove_option=True, coerce=int)
+    #base_city = SelectField('Select Base City:', remove_option=True, coerce=int)
+    #occupation = SelectField('Select Occupation:', remove_option=True, coerce=int)

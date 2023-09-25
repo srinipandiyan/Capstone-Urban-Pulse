@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, flash, redirect, session, g, 
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 
-from forms import UserAddForm, LoginForm
+from forms import UserAddForm, LoginForm, UpdateUserForm
 from models import db, connect_db, User
 from urban import cities
 
@@ -147,13 +147,36 @@ def logout():
 def user_profile():
     """Display user profile"""
 
-#Search routes
+    render_template('user/profile.html')
+    
+@app.route("/user/edit", methods=["POST"])
+def edit_profile():
+    """Display and handle user profile update form"""
 
-## @app.route("/search", methods=['GET', 'POST'])
-#def autocomplete():
-   # """Suggest cities for search functionality and get selected city for comparison"""
-    #if request.method == "GET":
-    #    return render_template("home.html", cities=cities)
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/login")
+    
+    user = g.user
+    form = UpdateUserForm(obj=user)
+
+    if form.validate_on_submit():
+        if User.authenticate(user.username, form.password.data):
+            #if valid authentication, access user model and update with form inputs
+            user.username = form.username.data
+            user.email = form.email.data
+
+            db.session.commit()
+            #redirect to user details page
+            flash("User profile updated.", "success")
+            return redirect("/user")
+        
+        else: flash("Please try again. Incorrect password credenitials.", "danger")
+
+    #redisplay form on unsuccessful validation
+    return render_template('user/edit.html', form=form) #,user_id=user.id)
+
+#Search routes
 
 @app.route("/search/<string:city_id>", methods=['GET'])
 def search(city_id):
