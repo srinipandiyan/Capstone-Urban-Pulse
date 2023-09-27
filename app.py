@@ -7,6 +7,7 @@ import requests
 
 from forms import UserAddForm, LoginForm, UpdateUserForm
 from models import db, connect_db, User
+
 from urban import cities
 
 CURR_USER_KEY = "curr_user"
