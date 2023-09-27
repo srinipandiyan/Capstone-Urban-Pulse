@@ -229,6 +229,7 @@ const cities = [
     "Shanghai, China",
     "Sofia, Bulgaria",
     "Stavanger, Norway",
+    "St. Louis, United States",
     "Stockholm, Sweden",
     "Stuttgart, Germany",
     "Sydney, Australia",
