@@ -3,6 +3,7 @@
 from flask import Flask, render_template, request, flash, redirect, session, g, abort, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
+import requests
 
 from forms import UserAddForm, LoginForm, UpdateUserForm
 from models import db, connect_db, User
@@ -147,9 +148,9 @@ def logout():
 def user_profile():
     """Display user profile"""
 
-    render_template('user/profile.html')
+    return render_template('user/profile.html')
     
-@app.route("/user/edit", methods=["POST"])
+@app.route("/user/edit", methods=["GET", "POST"])
 def edit_profile():
     """Display and handle user profile update form"""
 
@@ -177,6 +178,51 @@ def edit_profile():
     return render_template('user/edit.html', form=form) #,user_id=user.id)
 
 #Search routes
+def get_ua_id(city):
+    """
+    Given city from autocomplete suggestion, convert city name to API callable urban area id (ua_id).
+    ua_id will have all chars in lowercase, country and punctuation removed, and spaces replaced with hypens (-).
+
+    parameters:
+        city (str): the user readable city name and location, for example: "San Francisco Bay Area, United States"
+
+    returns:
+        returns ua_id (str)
+    """
+
+    #split the city string by comma, retain the city name, replace any spaces with a hypen, and lowercase all chars.
+    city_name = city.split(',')
+    ua_id = city_name[0].strip().replace(' ', '-').lower()
+    return ua_id
+
+
+def get_city_scores(ua_id):
+    """
+    Given ua_id, call city scores from Teleport API for urban areas.
+    
+    parameters: 
+        ua_id (str): the urban area id of a city, for example: "san-francisco-bay-area".
+            arg must given in lowercase with any spaces replaced with hypens (-).
+        
+    returns:
+       if request == 200, returns a JSON dict object from the API.
+            else, returns NONE.
+    """
+    #API URL route for urban area scores
+    url = f"https://api.teleport.org/api/urban_areas/slug%3A{ua_id}/scores/"
+    #GET request
+    response = requests.get(url)
+    
+    #verify request was successful with status code 200
+    if response.status_code == 200:
+        #return parsed json response
+        return response.json()
+        
+    else:
+        #handle case where the request was unsuccessful
+        print(f"GET request failed: status code {response.status_code}")
+        return None
+        
 
 @app.route("/search/<string:city_id>", methods=['GET'])
 def search(city_id):

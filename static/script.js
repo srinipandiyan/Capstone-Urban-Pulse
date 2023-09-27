@@ -33,7 +33,7 @@ const cities = [
     "Bern, Switzerland",
     "Bilbao, Spain",
     "Birmingham, United Kingdom",
-    "Birmingham, AL, United States",
+    "Birmingham AL, United States",
     "Bogota, Colombia",
     "Boise, United States",
     "Bologna, Italy",
@@ -174,8 +174,7 @@ const cities = [
     "Naples, Italy",
     "Nashville, United States",
     "New Orleans, United States",
-    "New York City, United States",
-    "Newcastle upon Tyne, United Kingdom",
+    "New York, United States",
     "Nice, France",
     "Nicosia, Cyprus",
     "Norfolk, United States",
@@ -194,7 +193,8 @@ const cities = [
     "Philadelphia, United States",
     "Phoenix, United States",
     "Pittsburgh, United States",
-    "Portland, United States",
+    "Portland ME, United States",
+    "Portland OR, United States",
     "Porto, Portugal",
     "Porto Alegre, Brazil",
     "Prague, Czech Republic",
@@ -215,9 +215,8 @@ const cities = [
     "Salvador, Brazil",
     "San Antonio, United States",
     "San Diego, United States",
-    "San Francisco, United States",
+    "San Francisco Bay Area, United States",
     "San Jose, Costa Rica",
-    "San Jose, United States",
     "San Juan, Puerto Rico",
     "San Salvador, El Salvador",
     "Santiago, Chile",
@@ -234,7 +233,7 @@ const cities = [
     "Stuttgart, Germany",
     "Sydney, Australia",
     "Tallinn, Estonia",
-    "Tampa, United States",
+    "Tampa Bay Area, United States",
     "Tbilisi, Georgia",
     "Tel Aviv, Israel",
     "Tenerife, Spain",
@@ -256,7 +255,7 @@ const cities = [
     "Vientiane, Laos",
     "Vilnius, Lithuania",
     "Warsaw, Poland",
-    "Washington, D.C., United States",
+    "Washington D.C., United States",
     "Wellington, New Zealand",
     "Winnipeg, Canada",
     "Wroclaw, Poland",
@@ -344,6 +343,7 @@ function handleSubmit() {
                 console.log("Request failed with status: " + response.status);
             }
         })
+        //may need to edit out
         .catch(error => {
             //handle network errors here, if needed.
             console.error("Network error:", error);
