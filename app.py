@@ -191,7 +191,7 @@ def get_ua_id(city):
         returns ua_id (str)
     """
 
-    #split the city string by comma, retain the city name, replace any spaces with a hypen, and lowercase all chars.
+    #split the city str by comma, retain the city name, replace any spaces with a hypen, and lowercase all chars.
     city_name = city.split(',')
     ua_id = city_name[0].strip().replace(' ', '-').lower()
     return ua_id
@@ -225,7 +225,10 @@ def get_city_scores(ua_id):
         return None
         
 
-@app.route("/search/<string:city_id>", methods=['GET'])
-def search(city_id):
+@app.route("/search/<string:city>", methods=['GET'])
+def search(city):
     """Comparison page for city"""
-    return render_template('city/comparison.html', city_id=city_id)
+    ua_id = get_ua_id(city)
+    scores = get_city_scores(ua_id)
+    
+    return render_template('city/comparison.html', city=city, scores=scores)
