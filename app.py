@@ -229,6 +229,6 @@ def get_city_scores(ua_id):
 def search(city):
     """Comparison page for city"""
     ua_id = get_ua_id(city)
-    scores = get_city_scores(ua_id)
+    data = get_city_scores(ua_id)
     
-    return render_template('city/comparison.html', city=city, scores=scores)
+    return render_template('city/comparison.html', city=city, data=data)

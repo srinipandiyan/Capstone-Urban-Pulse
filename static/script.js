@@ -344,11 +344,6 @@ function handleSubmit() {
                 console.log("Request failed with status: " + response.status);
             }
         })
-        //may need to edit out
-        .catch(error => {
-            //handle network errors here, if needed.
-            console.error("Network error:", error);
-        });
 }
 
 //function to handle form submission via enter keyup
