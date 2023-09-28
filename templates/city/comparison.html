@@ -7,38 +7,16 @@
 {% block stylesheets %} <link rel="stylesheet" href="{{ url_for('static', filename='scores.css') }}"> {% endblock %}
 {% block content %}
 
-  <div class="row justify-content-md-center">
+  <!--
+  <div class="">
     <div class="col-md-7 col-lg-5">
       <h2>Welcome to {{ city }}</h2>
     </div>
   </div>
-
-  <div class="container">
-    <h1>City Scores</h1>
-    <p>{{ data.summary | safe }}</p>
-    
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Score (out of 10)</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for category in data.categories %}
-            <tr>
-                <td>{{ category.name }}</td>
-                <td>{{ category.score_out_of_10 }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
-    <p>Teleport City Score: {{ data.teleport_city_score }}</p>
-</div>
+  -->
 
 <div class="container">
-  <h1>City Scores</h1>
+  <h1>City Scores for {{ city }}</h1>
   <p>{{ data.summary | safe }}</p>
 
   <table class="table table-striped">
@@ -53,7 +31,7 @@
           <tr>
               <td>{{ category.name }}</td>
               <td>
-                  <div class="score-bar range-{{ category.score_out_of_10 | round }} category-{{ loop.index }}">
+                  <div class="score-bar category-{{ loop.index }}">
                       {{ category.score_out_of_10 | round(1) }}
                   </div>
               </td>
