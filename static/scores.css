@@ -1,0 +1,78 @@
+/* Score bars styling */
+.score-bar {
+    height: 20px;
+    border-radius: 5px;
+    margin: 5px 0;
+    color: white;
+    text-align: right;
+    padding: 2px;
+}
+
+/* Category-specific colors */
+.category-1 {
+    background-color: #f3c32c; /* Housing color */
+}
+
+.category-2 {
+    background-color: #f3d630; /* Cost of Living color */
+}
+
+.category-3 {
+    background-color: #f4eb33; /* Startups color */
+}
+
+.category-4 {
+    background-color: #d2ed31; /* Venture Capital color */
+}
+
+.category-5 {
+    background-color: #7adc29; /* Travel Connectivity color */
+}
+
+.category-6 {
+    background-color: #36cc24; /* Commute color */
+}
+
+.category-7 {
+    background-color: #19ad51; /* Business Freedom color */
+}
+
+.category-8 {
+    background-color: #0d6999; /* Safety color */
+}
+
+.category-9 {
+    background-color: #051fa5; /* Healthcare color */
+}
+
+.category-10 {
+    background-color: #150e78; /* Education color */
+}
+
+.category-11 {
+    background-color: #3d14a4; /* Environmental Quality color */
+}
+
+.category-12 {
+    background-color: #5c14a1; /* Economy color */
+}
+
+.category-13 {
+    background-color: #88149f; /* Taxation color */
+}
+
+.category-14{
+    background-color: #b9117d; /* Internet Access color */
+}
+
+.category-15 {
+    background-color: #d10d54; /* Leisure & Culture color */
+}
+
+.category-16 {
+    background-color: #e70c26; /* Tolerance color */
+}
+
+.category-17 {
+    background-color: #f1351b; /* Outdoors color */
+}

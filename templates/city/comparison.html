@@ -4,6 +4,7 @@
 
 {% block body_class %}onboarding{% endblock %}
 
+{% block stylesheets %} <link rel="stylesheet" href="{{ url_for('static', filename='scores.css') }}"> {% endblock %}
 {% block content %}
 
   <div class="row justify-content-md-center">
@@ -36,8 +37,32 @@
     <p>Teleport City Score: {{ data.teleport_city_score }}</p>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<div class="container">
+  <h1>City Scores</h1>
+  <p>{{ data.summary | safe }}</p>
+
+  <table class="table table-striped">
+      <thead>
+          <tr>
+              <th>Category</th>
+              <th>Score (out of 10)</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for category in data.categories %}
+          <tr>
+              <td>{{ category.name }}</td>
+              <td>
+                  <div class="score-bar range-{{ category.score_out_of_10 | round }} category-{{ loop.index }}">
+                      {{ category.score_out_of_10 | round(1) }}
+                  </div>
+              </td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+
+  <p>Teleport City Score: {{ data.teleport_city_score | round }}</p>
+</div>
 
 {% endblock %}
