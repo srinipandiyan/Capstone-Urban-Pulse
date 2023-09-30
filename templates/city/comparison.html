@@ -4,19 +4,13 @@
 
 {% block body_class %}onboarding{% endblock %}
 
-{% block stylesheets %} <link rel="stylesheet" href="{{ url_for('static', filename='scores.css') }}"> {% endblock %}
+{% block stylesheets %} <link rel="stylesheet" href="{{ url_for('static', filename='comparison.css') }}"> {% endblock %}
 {% block content %}
-
-  <!--
-  <div class="">
-    <div class="col-md-7 col-lg-5">
-      <h2>Welcome to {{ city }}</h2>
-    </div>
-  </div>
-  -->
 
 <div class="container">
   <h1>City Scores for {{ city }}</h1>
+  <button id="favorite-button" class="btn btn-primary">Favorite</button>
+  <button id="base-city-button" class="btn btn-secondary">Set Base City</button>
   <p>{{ data.summary | safe }}</p>
 
   <table class="table table-striped">
@@ -42,5 +36,7 @@
 
   <p>Teleport City Score: {{ data.teleport_city_score | round }}</p>
 </div>
+
+<script  src="{{ url_for('static', filename='comparison.js') }}"></script>
 
 {% endblock %}

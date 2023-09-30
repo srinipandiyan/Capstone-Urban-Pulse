@@ -225,10 +225,24 @@ def get_city_scores(ua_id):
         return None
         
 
-@app.route("/search/<string:city>", methods=['GET'])
-def search(city):
-    """Comparison page for city"""
+@app.route("/search/<string:city>")
+def search_city(city):
+    """Get urban area id and redirect to comparison page"""
     ua_id = get_ua_id(city)
-    data = get_city_scores(ua_id)
     
-    return render_template('city/comparison.html', city=city, data=data)
+    
+    return redirect(f'/{ua_id}')
+
+@app.route("/<string:ua_id>", methods=['GET'])
+def comparison(ua_id):
+    """Comparison page for city"""
+    data = get_city_scores(ua_id)
+
+    return render_template('city/comparison.html', data=data)
+
+#Preferences routes
+@app.route("/favorites", methods=["POST"])
+def handleFavorite():
+    """"Handle adding or removing favorite to user account"""
+
+    return render_template('home.html')

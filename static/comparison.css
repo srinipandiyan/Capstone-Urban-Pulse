@@ -76,3 +76,9 @@
 .category-17 {
     background-color: #f1351b; /* Outdoors color */
 }
+
+.star {
+  font-size: 0.75rem;
+  margin: 0 5px;
+  cursor: pointer;
+}
