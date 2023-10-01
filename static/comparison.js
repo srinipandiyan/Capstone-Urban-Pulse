@@ -21,6 +21,7 @@ function submitFavorite() {
     favoriteBtn.classList.remove('btn-outline-warning');
     favoriteBtn.classList.add('btn-primary');
   }
+  
   const city = window.location.pathname.substring(1);
 
   $.ajax({
@@ -28,14 +29,6 @@ function submitFavorite() {
     url: '/favorites',
     data: JSON.stringify({ ua_id: city }),
     contentType: 'application/json',
-    success: function (response) {
-      // Handle a successful response here
-      console.log('Added to favorites');
-    },
-    error: function (error) {
-      // Handle errors here
-      console.error('Error adding to favorites', error);
-    },
   });
 }
 
@@ -56,6 +49,14 @@ function submitBaseCity() {
     baseCityBtn.classList.add('btn-secondary');
   }
 
+  const city = window.location.pathname.substring(1);
+
+  $.ajax({
+    type: 'POST',
+    url: '/basecity',
+    data: JSON.stringify({ ua_id: city }),
+    contentType: 'application/json',
+  });
 }
 
 

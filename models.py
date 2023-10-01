@@ -75,7 +75,7 @@ class City(db.Model):
 class FavoritedCity(db.Model):
     """User favorited model of Teleport Cities"""
     __tablename__ = 'favorite_cities'
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     city_id = db.Column(db.String(255), db.ForeignKey('cities.id'), nullable=False)
 

@@ -254,7 +254,7 @@ def comparison(ua_id):
 #Preferences routes
 @app.route("/favorites", methods=["POST"])
 def handle_favorite():
-    """"Handle adding or removing favorite to user account"""
+    """"Handle adding or removing favorite to favorite cities model"""
 
     if not g.user:
         flash("Access unauthorized.", "danger")
@@ -274,4 +274,28 @@ def handle_favorite():
 
     db.session.commit()
 
-    return redirect("/")
+    return render_template('base.html')
+
+@app.route("/basecity", methods=["POST"])
+def handle_base_city():
+    """Handle setting and removing base city to user model"""
+
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/login")
+    
+    data = request.json 
+    ua_id = data.get('ua_id')
+
+    user = User.query.filter_by(id=g.user.id).first()
+
+    if not user.base_city_id:
+        user.base_city_id = ua_id
+
+    else:
+        user.base_city_id = None
+    
+    db.session.add(user)
+    db.session.commit()
+
+    return render_template('base.html')
