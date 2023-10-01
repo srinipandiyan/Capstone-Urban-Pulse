@@ -145,7 +145,7 @@ def logout():
 
 #User routes
 
-@app.route("/user")
+@app.route('/user')
 def user_profile():
     """Display user profile"""
 
@@ -252,7 +252,7 @@ def comparison(ua_id):
     return render_template('city/comparison.html', city=city, data=data)
 
 #Preferences routes
-@app.route("/favorites", methods=["POST"])
+@app.route('/favorites', methods=["POST"])
 def handle_favorite():
     """"Handle adding or removing favorite to favorite cities model"""
 
@@ -276,7 +276,7 @@ def handle_favorite():
 
     return render_template('base.html')
 
-@app.route("/basecity", methods=["POST"])
+@app.route('/basecity', methods=["POST"])
 def handle_base_city():
     """Handle setting and removing base city to user model"""
 
@@ -289,7 +289,7 @@ def handle_base_city():
 
     user = User.query.filter_by(id=g.user.id).first()
 
-    if not user.base_city_id:
+    if user.base_city_id != ua_id:
         user.base_city_id = ua_id
 
     else:
