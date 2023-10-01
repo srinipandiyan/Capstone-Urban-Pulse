@@ -12,7 +12,7 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    base_city_id = db.Column(db.Integer, db.ForeignKey('cities.id'), nullable=True)
+    base_city_id = db.Column(db.String(255), db.ForeignKey('cities.id'), nullable=True)
     occupation = db.Column(db.Text, nullable=True)
     username = db.Column(db.Text, nullable=False, unique=True)
     email = db.Column(db.Text, nullable=False, unique=True)
@@ -63,12 +63,12 @@ class City(db.Model):
     """City model for Teleport cities"""
     __tablename__ = 'cities'
 
-    id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    id = db.Column(db.String(255), primary_key=True, nullable=False)
     name = db.Column(db.String(255), nullable=False)
-    images = db.Column(db.Text)
-    scores = db.Column(db.JSON)
-    details = db.Column(db.JSON)
-    salary = db.Column(db.JSON)
+    scores = db.Column(db.JSON, nullable=False)
+    #images = db.Column(db.Text, nullable=True)
+    #details = db.Column(db.JSON, nullable=True)
+    #salary = db.Column(db.JSON, nullable=True)
     
     user = db.relationship("User", backref="city")
 
@@ -77,7 +77,7 @@ class FavoritedCity(db.Model):
     __tablename__ = 'favorite_cities'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    city_id = db.Column(db.Integer, db.ForeignKey('cities.id'), nullable=False)
+    city_id = db.Column(db.String(255), db.ForeignKey('cities.id'), nullable=False)
 
     def __repr__(self):
         return f'<Favorited Cities: id={self.id}, user_id={self.user_id}, city_id={self.city_id}>'

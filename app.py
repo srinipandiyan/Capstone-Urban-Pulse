@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 import requests
 
 from forms import UserAddForm, LoginForm, UpdateUserForm
-from models import db, connect_db, User
+from models import db, connect_db, User, City
 
 from urban import cities
 
@@ -97,7 +97,7 @@ def signup():
 
         do_login(user)
 
-        return redirect("/")
+        return redirect("/search")
 
     else:
         return render_template('user/signup.html', form=form)
@@ -225,20 +225,31 @@ def get_city_scores(ua_id):
         return None
         
 
-@app.route("/search/<string:city>")
+@app.route("/search/<string:city>", methods=['GET'])
 def search_city(city):
-    """Get urban area id and redirect to comparison page"""
+    """Get ua_id, city scores, save to db, and redirect to comparison page"""
     ua_id = get_ua_id(city)
-    
-    
-    return redirect(f'/{ua_id}')
-
-@app.route("/<string:ua_id>", methods=['GET'])
-def comparison(ua_id):
-    """Comparison page for city"""
     data = get_city_scores(ua_id)
 
-    return render_template('city/comparison.html', data=data)
+    #Check if a city exists in the database using ua_id
+    in_db = City.query.filter_by(id=ua_id).first()
+
+    if not in_db:
+        urban_area = City(id=ua_id, name=city, scores=data)
+        db.session.add(urban_area)
+        db.session.commit()
+
+    return redirect(f'/{ua_id}')
+
+@app.route("/<string:ua_id>")
+def comparison(ua_id):
+    """Comparison page for city"""
+
+    urban_area = City.query.filter_by(id=ua_id).first()
+    city = urban_area.name
+    data = urban_area.scores
+
+    return render_template('city/comparison.html', city=city, data=data)
 
 #Preferences routes
 @app.route("/favorites", methods=["POST"])
