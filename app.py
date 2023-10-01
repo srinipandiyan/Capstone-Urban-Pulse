@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 import requests
 
 from forms import UserAddForm, LoginForm, UpdateUserForm
-from models import db, connect_db, User, City
+from models import db, connect_db, User, City, FavoritedCity
 
 from urban import cities
 
@@ -253,7 +253,25 @@ def comparison(ua_id):
 
 #Preferences routes
 @app.route("/favorites", methods=["POST"])
-def handleFavorite():
+def handle_favorite():
     """"Handle adding or removing favorite to user account"""
 
-    return render_template('home.html')
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/login")
+    
+    data = request.json 
+    ua_id = data.get('ua_id')
+
+    favorite = FavoritedCity.query.filter_by(user_id=g.user.id, city_id=ua_id).first()
+
+    if not favorite:
+        favorited_city = FavoritedCity(user_id=g.user.id, city_id=ua_id)
+        db.session.add(favorited_city)
+
+    else:
+        db.session.delete(favorite)
+
+    db.session.commit()
+
+    return redirect("/")

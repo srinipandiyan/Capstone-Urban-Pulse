@@ -11,18 +11,31 @@ let isBaseCity = false;
 function submitFavorite() {
   //toggle current state of favorite button
   isFavorite = !isFavorite;
-  favoriteBtn.textContent = isFavorite ? 'Unfavorite' : 'Favorite';
 
-  //get city from URL pathname
-  const city= window.location.pathname;
+  if (isFavorite) {
+    favoriteBtn.textContent = 'Unfavorite';
+    favoriteBtn.classList.remove('btn-primary');
+    favoriteBtn.classList.add('btn-outline-warning');
+  } else {
+    favoriteBtn.textContent = 'Favorite';
+    favoriteBtn.classList.remove('btn-outline-warning');
+    favoriteBtn.classList.add('btn-primary');
+  }
+  const city = window.location.pathname.substring(1);
 
-  // Send a POST request to the /user/favorite route
-  fetch('/favorites', {
-    method: 'POST',
-    data: { city: city }
-  })
-  .catch(error => {
-    // Handle any network or other errors here
+  $.ajax({
+    type: 'POST',
+    url: '/favorites',
+    data: JSON.stringify({ ua_id: city }),
+    contentType: 'application/json',
+    success: function (response) {
+      // Handle a successful response here
+      console.log('Added to favorites');
+    },
+    error: function (error) {
+      // Handle errors here
+      console.error('Error adding to favorites', error);
+    },
   });
 }
 
@@ -32,6 +45,16 @@ function submitFavorite() {
 function submitBaseCity() {
    //toggle current state of base city button
   isBaseCity = !isBaseCity;
+
+  if (isBaseCity) {
+    baseCityBtn.textContent = 'Remove Base City';
+    baseCityBtn.classList.remove('btn-secondary');
+    baseCityBtn.classList.add('btn-outline-danger');
+  } else {
+    baseCityBtn.textContent = 'Set As Base City';
+    baseCityBtn.classList.remove('btn-outline-danger');
+    baseCityBtn.classList.add('btn-secondary');
+  }
 
 }
 
