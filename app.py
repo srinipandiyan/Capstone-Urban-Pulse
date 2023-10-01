@@ -249,7 +249,14 @@ def comparison(ua_id):
     city = urban_area.name
     data = urban_area.scores
 
-    return render_template('city/comparison.html', city=city, data=data)
+    user = User.query.filter_by(id=g.user.id).first()
+    base_city_id = user.base_city_id
+    
+    base_city = City.query.filter_by(id=base_city_id).first()
+    base_name = base_city.name
+    base_data = base_city.scores
+
+    return render_template('city/comparison.html', city=city, data=data, base_name=base_name, base_data=base_data)
 
 #Preferences routes
 @app.route('/favorites', methods=["POST"])

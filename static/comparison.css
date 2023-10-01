@@ -77,8 +77,59 @@
     background-color: #f1351b; /* Outdoors color */
 }
 
+.width-0 {
+    width: 0%;
+    height: 0px;
+    border-radius: 0px;
+    margin: 0px 0;
+    color: black;
+    text-align: right;
+    padding: 0px;
+}
+
+.width-1 {
+    width: 10%;
+}
+
+.width-2 {
+    width: 20%;
+}
+
+.width-3 {
+    width: 30%;
+}
+
+.width-4 {
+    width: 40%;
+}
+
+.width-5 {
+    width: 50%;
+}
+
+.width-6 {
+    width: 60%;
+}
+
+.width-7 {
+    width: 70%;
+}
+
+.width-8 {
+    width: 80%;
+}
+
+.width-9 {
+    width: 90%;
+}
+.width-10 {
+    width: 100%;
+}
+
+/*
 .star {
   font-size: 0.75rem;
   margin: 0 5px;
   cursor: pointer;
 }
+*/

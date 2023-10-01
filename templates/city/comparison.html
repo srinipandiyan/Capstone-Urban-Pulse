@@ -18,23 +18,40 @@
           <tr>
               <th>Category</th>
               <th>Score (out of 10)</th>
+            {% if base_name %}
+                <th> {{ base_name }} (out of 10)</th>
+            {% endif %}
           </tr>
       </thead>
       <tbody>
-          {% for category in data.categories %}
+        {% for category in data.categories %}
           <tr>
               <td>{{ category.name }}</td>
               <td>
-                  <div class="score-bar category-{{ loop.index }}">
+                  <div class="score-bar category-{{ loop.index }} width-{{ category.score_out_of_10 | round(0) | int }}">
                       {{ category.score_out_of_10 | round(1) }}
                   </div>
               </td>
+
+            {% if base_data %}
+                <td>
+                    <div class="score-bar category-{{ loop.index }} width-{{ base_data.categories[loop.index - 1].score_out_of_10 | round(0) | int }}">
+                        {{ base_data.categories[loop.index - 1].score_out_of_10 | round(1) }}
+                    </div>
+                </td>
+            {% endif %}
           </tr>
-          {% endfor %}
+        {% endfor %}
       </tbody>
   </table>
 
-  <p>Teleport City Score: {{ data.teleport_city_score | round }}</p>
+    <p>
+        <span style="text-align:left;">Teleport City Score of <b>{{ data.teleport_city_score | round }}</b> for {{ city }}</span><br>
+    {% if base_name %}
+        <span style="text-align:right;">Teleport City Score of <b>{{ base_data.teleport_city_score | round }}</b> for {{ base_name }}</span>
+    {% endif %}
+    </p>
+   
 </div>
 
 <script  src="{{ url_for('static', filename='comparison.js') }}"></script>
