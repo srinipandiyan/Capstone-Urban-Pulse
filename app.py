@@ -1,6 +1,6 @@
 """Flask app for Urban Pulse"""
 
-from flask import Flask, render_template, request, flash, redirect, session, g, abort, jsonify
+from flask import Flask, render_template, request, flash, redirect, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 import requests
@@ -63,7 +63,7 @@ def do_logout():
 def root():
     """Render homepage at root directory."""
 
-    return render_template("base.html")
+    return render_template("home.html")
 
 
 @app.route('/signup', methods=["GET", "POST"])
@@ -125,8 +125,8 @@ def login():
 def homepage():
     """Homepage of Urban Pulse"""
     if g.user:
-        #user is authenticated, render the homepage
-        return render_template('home.html')
+        #user is authenticated, render search page
+        return render_template('search.html')
     else:
         #user is not authenticated, redirect to the index
         flash("Invalid credentials.", 'danger')
