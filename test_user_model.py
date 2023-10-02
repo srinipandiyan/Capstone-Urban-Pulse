@@ -5,7 +5,7 @@
 #    python -m unittest test_user_model.py
 
 from app import app
-from models import db, User, City, FavoritedCity
+from models import db, User
 
 from sqlalchemy import exc
 from unittest import TestCase

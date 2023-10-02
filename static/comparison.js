@@ -1,9 +1,9 @@
 const favoriteBtn = document.querySelector('#favorite-button');
 const baseCityBtn = document.querySelector('#base-city-button');
 
-//track state of favorite and base city buttons; default is false
-let isFavorite = false;
-let isBaseCity = false;
+//track state of favorite and base city buttons
+let isFavorite = favoriteBtn.textContent === 'Unfavorite' ? true : false;
+let isBaseCity = baseCityBtn.textContent === 'Remove Base City' ? true : false;
 
 /*
  * handle submit for favorite button

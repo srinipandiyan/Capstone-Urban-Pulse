@@ -252,13 +252,14 @@ def search_city(city):
 def comparison(ua_id):
     """Comparison page for city"""
 
-    urban_area = City.query.filter_by(id=ua_id).first()
-    city = urban_area.name
-    data = urban_area.scores
+    city = City.query.filter_by(id=ua_id).first()
+    name = city.name
+    data = city.scores
 
     user = User.query.filter_by(id=g.user.id).first()
     base_city_id = user.base_city_id
-    if base_city_id != ua_id:
+
+    if base_city_id != ua_id and base_city_id != None:
         base_city = City.query.filter_by(id=base_city_id).first()
         base_name = base_city.name
         base_data = base_city.scores
@@ -266,7 +267,31 @@ def comparison(ua_id):
         base_name = None
         base_data = None
 
-    return render_template('city/comparison.html', city=city, data=data, base_name=base_name, base_data=base_data)
+    #check if city is favorited
+    check_favorite = FavoritedCity.query.filter_by(user_id=user.id, city_id=city.id).first()
+    if check_favorite:
+        #city is favorited
+        fav_btn_state = "Unfavorite"
+    else:
+        #city is not favorited
+        fav_btn_state = "Favorite"
+
+    #check if city is base city
+    if base_city_id == ua_id:
+        #base city and city are the same
+        base_btn_state = "Remove Base City"
+    else:
+        #base city and city are nto the same
+        base_btn_state = "Set As Base City"
+
+    return render_template('city/comparison.html', 
+                           name=name, 
+                           data=data, 
+                           base_name=base_name, 
+                           base_data=base_data,
+                           fav_btn_state=fav_btn_state,
+                           base_btn_state=base_btn_state
+                        )
 
 #Preferences routes
 @app.route('/favorites', methods=["POST"])
