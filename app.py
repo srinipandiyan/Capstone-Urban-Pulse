@@ -147,9 +147,16 @@ def logout():
 
 @app.route('/user')
 def user_profile():
-    """Display user profile"""
+    """Display user profile and populate user favorites"""
 
-    return render_template('user/profile.html')
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/login")
+    
+    favorites = FavoritedCity.query.filter_by(user_id=g.user.id)
+    city_ids = [favorite.city_id for favorite in favorites]
+
+    return render_template('user/profile.html', favorites=city_ids)
     
 @app.route("/user/edit", methods=["GET", "POST"])
 def edit_profile():
@@ -251,10 +258,13 @@ def comparison(ua_id):
 
     user = User.query.filter_by(id=g.user.id).first()
     base_city_id = user.base_city_id
-    
-    base_city = City.query.filter_by(id=base_city_id).first()
-    base_name = base_city.name
-    base_data = base_city.scores
+    if base_city_id != ua_id:
+        base_city = City.query.filter_by(id=base_city_id).first()
+        base_name = base_city.name
+        base_data = base_city.scores
+    else:
+        base_name = None
+        base_data = None
 
     return render_template('city/comparison.html', city=city, data=data, base_name=base_name, base_data=base_data)
 
@@ -282,6 +292,12 @@ def handle_favorite():
     db.session.commit()
 
     return render_template('base.html')
+
+@app.route('/city/favorites')
+def render_favorite_cities():
+     """Render favorite urban areas from within user profile"""
+     return render_template('city/favorites.html')
+
 
 @app.route('/basecity', methods=["POST"])
 def handle_base_city():
