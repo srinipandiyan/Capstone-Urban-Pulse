@@ -10,8 +10,8 @@
 <div class="container">
   <h1>City Scores for {{ name }}</h1>
   
-  <button id="favorite-button" class='btn {{ "btn-outline-warning" if fav_btn_state == "Unfavorite" else "btn-primary" }}'>{{ fav_btn_state }}</button>
   <button id="base-city-button" class='btn {{ "btn-outline-danger" if base_btn_state == "Remove Base City" else "btn-secondary" }}'>{{ base_btn_state }}</button>
+  <button id="favorite-button" class='btn {{ "btn-outline-warning" if fav_btn_state == "Unfavorite" else "btn-primary" }}'>{{ fav_btn_state }}</button>
   
   <p>{{ data.summary | safe }}</p>
 
@@ -47,12 +47,12 @@
       </tbody>
   </table>
 
-    <p>
-        <span style="text-align:left;">Teleport City Score of <b>{{ data.teleport_city_score | round }}</b> for {{ name }}</span><br>
-    {% if base_name %}
-        <span style="text-align:right;">Teleport City Score of <b>{{ base_data.teleport_city_score | round }}</b> for {{ base_name }}</span>
-    {% endif %}
-    </p>
+    <div>
+            <p>Total City Score of <b>{{ data.teleport_city_score | round }}</b> for {{ name }}</p>
+        {% if base_name %}
+            <p>Total City Score of <b>{{ base_data.teleport_city_score | round }}</b> for {{ base_name }}</p>
+        {% endif %}
+    </div>
    
 </div>
 

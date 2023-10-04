@@ -153,10 +153,13 @@ def user_profile():
         flash("Access unauthorized.", "danger")
         return redirect("/login")
     
+    user = User.query.filter_by(id=g.user.id).first()
+    base_city = user.base_city_id if user else None
+
     favorites = FavoritedCity.query.filter_by(user_id=g.user.id)
     city_ids = [favorite.city_id for favorite in favorites]
 
-    return render_template('user/profile.html', favorites=city_ids)
+    return render_template('user/profile.html', favorites=city_ids, base_city=base_city)
     
 @app.route("/user/edit", methods=["GET", "POST"])
 def edit_profile():
@@ -231,7 +234,7 @@ def get_city_scores(ua_id):
         print(f"GET request failed: status code {response.status_code}")
         return None
     
-def get_city_images(ua_id):
+def get_city_photo(ua_id):
     """
     Given ua_id, get city image url from Teleport API for urban areas.
     
@@ -261,18 +264,19 @@ def get_city_images(ua_id):
         print(f"GET request failed: status code {response.status_code}")
         return None
         
-        
+
 @app.route("/search/<string:city>", methods=['GET'])
 def search_city(city):
     """Get ua_id, city scores, save to db, and redirect to comparison page"""
     ua_id = get_ua_id(city)
     data = get_city_scores(ua_id)
+    photo = get_city_photo(ua_id)
 
     #Check if a city exists in the database using ua_id
     in_db = City.query.filter_by(id=ua_id).first()
 
     if not in_db:
-        urban_area = City(id=ua_id, name=city, scores=data)
+        urban_area = City(id=ua_id, name=city, scores=data, photo=photo)
         db.session.add(urban_area)
         db.session.commit()
 
@@ -281,6 +285,9 @@ def search_city(city):
 @app.route("/<string:ua_id>")
 def comparison(ua_id):
     """Comparison page for city"""
+    if not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/login")
 
     city = City.query.filter_by(id=ua_id).first()
     name = city.name

@@ -66,7 +66,7 @@ class City(db.Model):
     id = db.Column(db.String(255), primary_key=True, nullable=False)
     name = db.Column(db.String(255), nullable=False)
     scores = db.Column(db.JSON, nullable=False)
-    #images = db.Column(db.Text, nullable=True)
+    photo = db.Column(db.Text, nullable=True)
     #details = db.Column(db.JSON, nullable=True)
     #salary = db.Column(db.JSON, nullable=True)
     
