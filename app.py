@@ -230,8 +230,38 @@ def get_city_scores(ua_id):
         #handle case where the request was unsuccessful
         print(f"GET request failed: status code {response.status_code}")
         return None
+    
+def get_city_images(ua_id):
+    """
+    Given ua_id, get city image url from Teleport API for urban areas.
+    
+    parameters: 
+        ua_id (str): the urban area id of a city, for example: "san-francisco-bay-area".
+            arg must given in lowercase with any spaces replaced with hypens (-).
         
-
+    returns:
+       if request == 200, returns a str from the API.
+            else, returns NONE.
+    """
+    #API URL route for urban area scores
+    url = f"https://api.teleport.org/api/urban_areas/slug%3A{ua_id}/images/"
+    #GET request
+    response = requests.get(url)
+    
+    #verify request was successful with status code 200
+    if response.status_code == 200:
+        #parse json response
+        data = response.json()
+        #access and return the web image URL from response
+        image_url = data['photos'][0]['image']['web']
+        return image_url
+        
+    else:
+        #handle case where the request was unsuccessful
+        print(f"GET request failed: status code {response.status_code}")
+        return None
+        
+        
 @app.route("/search/<string:city>", methods=['GET'])
 def search_city(city):
     """Get ua_id, city scores, save to db, and redirect to comparison page"""
