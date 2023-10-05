@@ -67,8 +67,8 @@ class City(db.Model):
     name = db.Column(db.String(255), nullable=False)
     scores = db.Column(db.JSON, nullable=False)
     photo = db.Column(db.Text, nullable=True)
-    #details = db.Column(db.JSON, nullable=True)
-    #salary = db.Column(db.JSON, nullable=True)
+    details = db.Column(db.JSON, nullable=True)
+    salaries = db.Column(db.JSON, nullable=True)
     
     user = db.relationship("User", backref="city")
 

@@ -246,7 +246,8 @@ def get_city_photo(ua_id):
        if request == 200, returns a str from the API.
             else, returns NONE.
     """
-    #API URL route for urban area scores
+
+    #API URL route for urban area photo
     url = f"https://api.teleport.org/api/urban_areas/slug%3A{ua_id}/images/"
     #GET request
     response = requests.get(url)
@@ -263,23 +264,92 @@ def get_city_photo(ua_id):
         #handle case where the request was unsuccessful
         print(f"GET request failed: status code {response.status_code}")
         return None
+    
+def get_city_details(ua_id):
+    """
+    Given ua_id, get city details from Teleport API for urban area.
+    
+    parameters: 
+        ua_id (str): the urban area id of a city, for example: "san-francisco-bay-area".
+            arg must given in lowercase with any spaces replaced with hypens (-).
         
+    returns:
+       if request == 200, returns a JSON dict object from the API.
+            else, returns NONE.
+    """
+
+    #API URL route for urban area details
+    url = f"https://api.teleport.org/api/urban_areas/slug%3A{ua_id}/details/"
+    #GET request
+    response = requests.get(url)
+
+    #verify request was successful with status code 200
+    if response.status_code == 200:
+        #return parsed json response
+        return response.json()
+        
+    else:
+        #handle case where the request was unsuccessful
+        print(f"GET request failed: status code {response.status_code}")
+        return None
+        
+def get_city_salaries(ua_id):
+    """
+    Given ua_id, call city salaries from Teleport API for occupations in urban areas.
+    
+    parameters: 
+        ua_id (str): the urban area id of a city, for example: "san-francisco-bay-area".
+            arg must given in lowercase with any spaces replaced with hypens (-).
+        
+    returns:
+       if request == 200, returns a JSON dict object from the API.
+            else, returns NONE.
+    """
+
+    #API URL route for urban area occupational salaries
+    url = f"https://api.teleport.org/api/urban_areas/slug%3A{ua_id}/salaries/"
+    #GET request
+    response = requests.get(url)
+    
+    #verify request was successful with status code 200
+    if response.status_code == 200:
+        #return parsed json response
+        return response.json()
+        
+    else:
+        #handle case where the request was unsuccessful
+        print(f"GET request failed: status code {response.status_code}")
+        return None
+    
 
 @app.route("/search/<string:city>", methods=['GET'])
 def search_city(city):
     """Get ua_id, city scores, save to db, and redirect to comparison page"""
-    ua_id = get_ua_id(city)
-    data = get_city_scores(ua_id)
-    photo = get_city_photo(ua_id)
 
     #Check if a city exists in the database using ua_id
+    ua_id = get_ua_id(city)
     in_db = City.query.filter_by(id=ua_id).first()
 
     if not in_db:
-        urban_area = City(id=ua_id, name=city, scores=data, photo=photo)
+        #Get city scores, photo, details, and occupational salaries
+        data = get_city_scores(ua_id)
+        photo = get_city_photo(ua_id)
+        details = get_city_details(ua_id)
+        salaries = get_city_salaries(ua_id)
+
+        #Create new city object and initialize with relevant information 
+        urban_area = City(id=ua_id, 
+                          name=city, 
+                          scores=data, 
+                          photo=photo, 
+                          details=details, 
+                          salaries=salaries)
+        
+        #Add and commit urban area to database
         db.session.add(urban_area)
         db.session.commit()
 
+    #redirect to city comparison page
     return redirect(f'/{ua_id}')
 
 @app.route("/<string:ua_id>")
