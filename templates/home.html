@@ -10,8 +10,10 @@
             
             <h4 class="lead mt-3">Your 1st choice next-stop awaits!</h4>
             
-            <a href="/signup" class="btn btn-primary btn-lg mt-2">Start Exploring</a>
-            
+            {% if not g.user %}
+                <a href="/signup" class="btn btn-primary btn-lg mt-2">Start Exploring</a>
+            {% endif %}
+
             {% if g.user %}
                 <a href="/search" class="btn btn-primary btn-lg mt-2">Explore our Cities</a>
             {% endif %}
