@@ -1,6 +1,6 @@
 """Flask app for Urban Pulse"""
 
-from flask import Flask, render_template, request, flash, redirect, session, g
+from flask import Flask, render_template, request, flash, redirect, session, g, abort
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 import requests
@@ -8,7 +8,7 @@ import requests
 from forms import UserAddForm, LoginForm, UpdateUserForm
 from models import db, connect_db, User, City, FavoritedCity
 
-from urban import cities
+from urban import cities, valid_ua_ids
 
 CURR_USER_KEY = "curr_user"
 
@@ -30,7 +30,7 @@ connect_db(app)
 db.create_all()
 
 ##############################################################################
-#User signup/login/logout routes
+#homepage/signup/login/logout routes with error handling
 
 #User is kept track of globally in this route
 #The `@app.before_request` is a decorator that runs a function before all incoming requests to the Flask app. 
@@ -41,16 +41,25 @@ def add_user_to_g():
     #The following code is used to initialize Flask's g object and store the session user.
     if CURR_USER_KEY in session:
         g.user = User.query.get(session[CURR_USER_KEY])
-
+    
     else:
         g.user = None
+        
+    #list of routes excluded from authentication protocol
+    excluded_routes = ['/', '/login', '/signup']
 
+    #verify current route and check if in excluded routes list
+    if request.path in excluded_routes:
+        return
+    elif not g.user:
+        flash("Access unauthorized.", "danger")
+        return redirect("/login")
+    
 
 def do_login(user):
     """Log in user."""
 
     session[CURR_USER_KEY] = user.id
-
 
 def do_logout():
     """Logout user."""
@@ -121,17 +130,6 @@ def login():
 
     return render_template('user/login.html', form=form)
 
-@app.route('/search')
-def homepage():
-    """Homepage of Urban Pulse"""
-    if g.user:
-        #user is authenticated, render search page
-        return render_template('search.html')
-    else:
-        #user is not authenticated, redirect to the index
-        flash("Invalid credentials.", 'danger')
-        return redirect("/")
-
 
 @app.route('/logout')
 def logout():
@@ -143,15 +141,17 @@ def logout():
     return redirect("/")
 
 
-#User routes
+@app.errorhandler(404)
+def page_not_found(e):
+    """404 NOT FOUND page."""
 
+    return render_template('404.html'), 404
+
+
+#User routes
 @app.route('/user')
 def user_profile():
     """Display user profile and populate user favorites"""
-
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/login")
     
     user = User.query.filter_by(id=g.user.id).first()
     base_city = user.base_city_id if user else None
@@ -160,14 +160,11 @@ def user_profile():
     city_ids = [favorite.city_id for favorite in favorites]
 
     return render_template('user/profile.html', favorites=city_ids, base_city=base_city)
-    
+
+
 @app.route("/user/edit", methods=["GET", "POST"])
 def edit_profile():
     """Display and handle user profile update form"""
-
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/login")
     
     user = g.user
     form = UpdateUserForm(obj=user)
@@ -205,7 +202,6 @@ def get_ua_id(city):
     city_name = city.split(',')
     ua_id = city_name[0].strip().replace(' ', '-').lower()
     return ua_id
-
 
 def get_city_scores(ua_id):
     """
@@ -322,9 +318,19 @@ def get_city_salaries(ua_id):
         return None
     
 
+@app.route('/search')
+def search_page():
+    """Search page of Urban Pulse"""
+    #render search page
+    return render_template('search.html')
+
+
 @app.route("/search/<string:city>", methods=['GET'])
 def search_city(city):
     """Get ua_id, city scores, save to db, and redirect to comparison page"""
+    #validate city input
+    if city not in cities:
+        abort(404)
 
     #Check if a city exists in the database using ua_id
     ua_id = get_ua_id(city)
@@ -352,14 +358,19 @@ def search_city(city):
     #redirect to city comparison page
     return redirect(f'/{ua_id}')
 
+
 @app.route("/<string:ua_id>")
 def comparison(ua_id):
     """Comparison page for city"""
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/login")
-
+    if ua_id not in valid_ua_ids:
+        abort(404)
+    
     city = City.query.filter_by(id=ua_id).first()
+    
+    if city is None:
+        flash("Select from suggestions or search again.", "info")
+        return redirect("/search")
+    
     name = city.name
     data = city.scores
 
@@ -400,15 +411,12 @@ def comparison(ua_id):
                            base_btn_state=base_btn_state
                         )
 
+
 #Preferences routes
 @app.route('/favorites', methods=["POST"])
 def handle_favorite():
     """"Handle adding or removing favorite to favorite cities model"""
 
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/login")
-    
     data = request.json 
     ua_id = data.get('ua_id')
 
@@ -425,6 +433,7 @@ def handle_favorite():
 
     return render_template('base.html')
 
+
 @app.route('/city/favorites')
 def render_favorite_cities():
      """Render favorite urban areas from within user profile"""
@@ -434,10 +443,6 @@ def render_favorite_cities():
 @app.route('/basecity', methods=["POST"])
 def handle_base_city():
     """Handle setting and removing base city to user model"""
-
-    if not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/login")
     
     data = request.json 
     ua_id = data.get('ua_id')
