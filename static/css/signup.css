@@ -1,20 +1,19 @@
 body {
-    background-image: url(../img/workspace.jpg);
+    background-image: url(../img/books.jpg);
     background-size: cover;
 }
 
-
-#login-container {
+#signup-container {
     justify-content: center;
     text-align: center;
     align-items: center;
     color: white;
     margin-top: 195px;
-    margin-left: 40px;
 }
 
 .join-message {
-    font-size: 24px;
+    font-size: 32px;
+    font-weight: 700;
     opacity: 0.85;
 }
 
