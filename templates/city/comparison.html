@@ -4,7 +4,7 @@
 
 {% block body_class %}onboarding{% endblock %}
 
-{% block stylesheets %} <link rel="stylesheet" href="{{ url_for('static', filename='comparison.css') }}"> {% endblock %}
+{% block stylesheets %} <link rel="stylesheet" href="{{ url_for('static', filename='css/comparison.css') }}"> {% endblock %}
 
 {% block content %}
 
@@ -72,7 +72,7 @@
                 <b>{{ base_data.teleport_city_score | int }}</b> points.
             </p>
   
-            <p> The difference in scores between these areas is
+            <p> The difference in scores between these cities is
                 <b>{{ ( data.teleport_city_score | int - base_data.teleport_city_score | int ) }}</b> points.
             </p>
         {% endif %}
@@ -80,6 +80,6 @@
     </div>
 </div>
 
-<script  src="{{ url_for('static', filename='comparison.js') }}"></script>
+<script  src="{{ url_for('static', filename='js/comparison.js') }}"></script>
 
 {% endblock %}

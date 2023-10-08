@@ -46,14 +46,16 @@ def add_user_to_g():
         g.user = None
         
     #list of routes excluded from authentication protocol
-    excluded_routes = ['/', '/login', '/signup', '/static/photos/favicon.png', '/static/home.css', '/static/photos/mountain.jpg', '/static/login.css', '/static/signup.css',]
+    excluded_routes = ['/', '/login', '/signup']
 
-    #verify current route and check if in excluded routes list
-    if request.path in excluded_routes:
-        return
-    elif not g.user:
-        flash("Access unauthorized.", "danger")
-        return redirect("/login")
+    #verify route does not start with '/static'
+    if not request.path.startswith('/static'):
+        #verify current route and check if in excluded routes list
+        if request.path in excluded_routes:
+            return
+        elif not g.user:
+            flash("Access unauthorized.", "danger")
+            return redirect("/login")
     
 
 def do_login(user):
@@ -322,7 +324,7 @@ def get_city_salaries(ua_id):
 def search_page():
     """Search page of Urban Pulse"""
     #render search page
-    return render_template('search.html')
+    return render_template('city/search.html')
 
 
 @app.route("/search/<string:city>", methods=['GET'])

@@ -1,5 +1,5 @@
 body {
-    background-image: url(photos/mountain.jpg);
+    background-image: url(../img/mountain.jpg);
     background-size: cover;
     color: white;
 }

@@ -1,0 +1,20 @@
+#nav-container {
+    opacity: 0.8;
+}
+
+.navbar-brand {
+    opacity: 0.9;
+}
+
+.nav-item {
+    opacity: 0.9;
+}
+
+.nav-link {
+    opacity: 0.9;
+}
+
+#alert-container {
+    max-width: 480px;
+    opacity: 0.8;
+}
