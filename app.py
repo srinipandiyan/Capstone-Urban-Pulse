@@ -1,14 +1,14 @@
 """Flask app for Urban Pulse"""
 
-from flask import Flask, render_template, request, flash, redirect, session, g, abort
+from flask import Flask, render_template, flash, redirect, abort, request, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 import requests
 
-from forms import UserAddForm, LoginForm, UpdateUserForm
+from forms import UserAddForm, LoginForm, UpdateUserForm, DeleteUserForm
 from models import db, connect_db, User, City, FavoritedCity
 
-from urban import cities, valid_ua_ids
+from urban import valid_cities, valid_ua_ids
 
 CURR_USER_KEY = "curr_user"
 
@@ -153,7 +153,7 @@ def page_not_found(e):
 #User routes
 @app.route('/user')
 def user_profile():
-    """Display user profile and populate user favorites"""
+    """Display user profile and populate user favorites."""
     
     user = User.query.filter_by(id=g.user.id).first()
     base_city = user.base_city_id if user else None
@@ -166,7 +166,7 @@ def user_profile():
 
 @app.route("/user/edit", methods=["GET", "POST"])
 def edit_profile():
-    """Display and handle user profile update form"""
+    """Display and handle user profile update form."""
     
     user = g.user
     form = UpdateUserForm(obj=user)
@@ -185,7 +185,34 @@ def edit_profile():
         else: flash("Please try again. Incorrect password credenitials.", "danger")
 
     #redisplay form on unsuccessful validation
-    return render_template('user/edit.html', form=form) #,user_id=user.id)
+    return render_template('user/edit.html', form=form)
+
+@app.route('/user/delete',  methods=["GET", "POST"])
+def delete_user():
+    """Display and handle delete user form."""
+    
+    user = g.user
+    form = DeleteUserForm(obj=user)
+
+    if form.validate_on_submit():
+        if User.authenticate(user.username, form.password.data):
+            #if valid authentication, access user model and delete user from database
+            user = User.query.get_or_404(g.user.id)
+
+            db.session.delete(user)
+            db.session.commit()
+
+            do_logout()
+
+            #alert and redirect to  homepage
+            flash("User profile deleted.", "primary")
+            return redirect("/")
+        
+        else: flash("Please try again. Incorrect password credenitials.", "danger")
+
+    #redisplay form on unsuccessful validation
+    return render_template('user/delete.html', form=form)
+
 
 #Search routes
 def get_ua_id(city):
@@ -329,10 +356,11 @@ def search_page():
 
 @app.route("/search/<string:city>", methods=['GET'])
 def search_city(city):
-    """Get ua_id, city scores, save to db, and redirect to comparison page"""
-    #validate city input
-    if city not in cities:
-        abort(404)
+    """Get ua_id, city scores, save to db, and redirect to comparison page."""
+    #verify city is a valid city
+    if city not in valid_cities:
+        flash("Select an urban area from suggestions.", "info")
+        return redirect("/search")
 
     #Check if a city exists in the database using ua_id
     ua_id = get_ua_id(city)
@@ -363,15 +391,13 @@ def search_city(city):
 
 @app.route("/<string:ua_id>")
 def comparison(ua_id):
-    """Comparison page for city"""
+    """Render comparison page for city with relevant user-selected preferences."""
+
     if ua_id not in valid_ua_ids:
-        abort(404)
-    
-    city = City.query.filter_by(id=ua_id).first()
-    
-    if city is None:
-        flash("Select from suggestions or search again.", "info")
+        flash("Select from suggestions and search again.", "info")
         return redirect("/search")
+
+    city = City.query.get_or_404(ua_id)
     
     name = city.name
     data = city.scores
@@ -417,7 +443,7 @@ def comparison(ua_id):
 #Preferences routes
 @app.route('/favorites', methods=["POST"])
 def handle_favorite():
-    """"Handle adding or removing favorite to favorite cities model"""
+    """"Handle adding or removing favorite to favorite cities model."""
 
     data = request.json 
     ua_id = data.get('ua_id')
@@ -438,13 +464,13 @@ def handle_favorite():
 
 @app.route('/city/favorites')
 def render_favorite_cities():
-     """Render favorite urban areas from within user profile"""
+     """Render favorite urban areas from within user profile."""
      return render_template('city/favorites.html')
 
 
 @app.route('/basecity', methods=["POST"])
 def handle_base_city():
-    """Handle setting and removing base city to user model"""
+    """Handle setting and removing base city to user model."""
     
     data = request.json 
     ua_id = data.get('ua_id')

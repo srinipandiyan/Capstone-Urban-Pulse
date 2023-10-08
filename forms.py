@@ -27,3 +27,7 @@ class UpdateUserForm(FlaskForm):
     password = PasswordField('Password', validators=[Length(min=6)])
     #base_city = SelectField('Select Base City:', remove_option=True, coerce=int)
     #occupation = SelectField('Select Occupation:', remove_option=True, coerce=int)
+
+class DeleteUserForm(FlaskForm):
+    """Delete user form."""
+    password = PasswordField('Password', validators=[Length(min=6)])

@@ -1,4 +1,4 @@
-cities = [
+valid_cities = [
     "Aarhus, Denmark",
     "Adelaide, Australia",
     "Albuquerque, United States",

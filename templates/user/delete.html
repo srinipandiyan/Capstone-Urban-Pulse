@@ -4,8 +4,8 @@
 
 <div class="row justify-content-md-center">
   <div class="col-md-4">
-    <h2 class="join-message">Edit Your Profile.</h2>
-    <form method="POST" id="profile_form">
+    <h2 class="join-message">Delete Profile.</h2>
+    <form method="POST" id="delete_form">
       {{ form.hidden_tag() }}
 
       {% for field in form if field.widget.input_type != 'hidden' and field.name != 'password' %}
@@ -26,8 +26,8 @@
       {{ form.password(placeholder="Enter your password to confirm", class="form-control") }}
       <br>
         <div class="edit-btn-area">
-          <button class="btn btn-outline-success">Edit</button>
-          <a href="/user" class="btn btn-outline-danger">Cancel</a>
+          <a href="/user" class="btn btn-outline-primary">Cancel</a>
+          <button class="btn btn-outline-danger">Delete</button>
         </div>
     </form>
   </div>

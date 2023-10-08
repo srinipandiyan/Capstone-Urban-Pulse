@@ -19,7 +19,7 @@ class User(db.Model):
     password = db.Column(db.Text, nullable=False)
 
     base_city = db.relationship("City", backref="user_id", uselist=False)
-    favorited_cities = db.relationship("FavoritedCity", backref="user")
+    favorited_cities = db.relationship("FavoritedCity", backref="user", cascade="all, delete-orphan")
 
     @classmethod
     def signup(cls, username, email, password):
@@ -70,7 +70,6 @@ class City(db.Model):
     details = db.Column(db.JSON, nullable=True)
     salaries = db.Column(db.JSON, nullable=True)
     
-    user = db.relationship("User", backref="city")
 
 class FavoritedCity(db.Model):
     """User favorited model of Teleport Cities"""
