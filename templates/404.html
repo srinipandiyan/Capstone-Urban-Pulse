@@ -4,19 +4,21 @@
 
 {% block content %}
 
-<div class="message-404">
-    <h4 class="display-4">Sorry, that page doesn't exist! {{ request.status }}</h4>
-    <p class="m-3">
-      You can search Urban Pulse using the search box below or
-      <a href="/"><b>return to the homepage</b></a>.</p>
-    <div class="row">
-      <div class="col-sm-8 ml-auto mr-auto">
-        <form class="form-inline" action="/search">
-          <input name="q" class="form-control mb-0 mr-2" placeholder="Search Urban Pulse">
-          <button class="btn btn-default">Search</button>
-        </form>
-      </div>
-    </div>
+<div class="container text-center mt-5">
+  <div class="alert alert-primary" role="alert">
+      <h4 class="alert-heading">Oops! Page Not Found</h4>
+      <p class="mb-0">That page doesn't exist on Urban Pulse.</p>
   </div>
+  <p class="lead">How would you like to proceed?</p>
+      <p class="mt-3">
+          <a href="/search" class="btn btn-primary btn-lg">
+              <i class="fas fa-search"></i> Search Urban Areas
+          </a>
+          <a href="/" class="btn btn-secondary btn-lg">
+              <i class="fas fa-home"></i> Return to Homepage
+          </a>
+      </p>
+  </ul>
+</div>
 
 {% endblock %}

@@ -283,7 +283,7 @@ function searchHandler(e) {
 	const inputVal = e.target.value.toLowerCase();
 	//store and match user input to urban area
 	const results = search(inputVal);
-	//show matching fruit in dropdown menu else reset suggestions if no user input
+	//show matching urban areas in dropdown menu, else reset suggestions if there is no user input
 	inputVal ? showSuggestions(results) : suggestions.innerText = "";
 }
 
@@ -297,7 +297,7 @@ function showSuggestions(results) {
 	//userinput to display suggestions upon user keyup events
 	if (results.length > 0){
 		//displays abbreviated results--up to first five elements
-		for (let i = 0; i < results.length && i < 5; i++){
+		for (let i = 0; i < results.length && i < 10; i++){
 			//created new list item element
 			const newLi = document.createElement("li");
 			//innerText of <li> set to index item in results array

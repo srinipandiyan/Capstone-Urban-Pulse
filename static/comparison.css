@@ -79,54 +79,407 @@
 
 /* Width of score-bar */
 .width-0 {
-    width: 0%;
+    width: 0%; /* score-bar width set to 0% */
     color: black;
     background-color: transparent;
 }
 
 .width-1 {
-    width: 10%;
+    width: 7%; /* score-bar width ceiled to 7% */
 }
 
 .width-2 {
-    width: 20%;
+    width: 7%; /* score-bar width ceiled to 7% */
 }
 
 .width-3 {
-    width: 30%;
+    width: 7%; /* score-bar width ceiled to 7% */
 }
 
 .width-4 {
-    width: 40%;
+    width: 8%; /* score-bar width ceiled to 8% */
 }
 
 .width-5 {
-    width: 50%;
+    width: 8%; /* score-bar width ceiled to 8% */
 }
 
 .width-6 {
-    width: 60%;
+    width: 8%; /* score-bar width ceiled to 8% */
 }
 
 .width-7 {
-    width: 70%;
+    width: 8%; /* score-bar width ceiled to 8% */
 }
 
 .width-8 {
-    width: 80%;
+    width: 8%; /* score-bar width set to 8% */
 }
 
 .width-9 {
-    width: 90%;
-}
-.width-10 {
-    width: 100%;
+    width: 9%; /* score-bar width set to 9% */
 }
 
-/*
-.star {
-  font-size: 0.75rem;
-  margin: 0 5px;
-  cursor: pointer;
+.width-10 {
+    width: 10%; /* score-bar width set to 10% */
 }
-*/
+
+.width-11 {
+    width: 11%; /* score-bar width set to 11% */
+}
+
+.width-12 {
+    width: 12%; /* score-bar width set to 12% */
+}
+
+.width-13 {
+    width: 13%; /* score-bar width set to 13% */
+}
+
+.width-14 {
+    width: 14%; /* score-bar width set to 14% */
+}
+
+.width-15 {
+    width: 15%; /* score-bar width set to 15% */
+}
+
+.width-16 {
+    width: 16%; /* score-bar width set to 16% */
+}
+
+.width-17 {
+    width: 17%; /* score-bar width set to 17% */
+}
+
+.width-18 {
+    width: 18%; /* score-bar width set to 18% */
+}
+
+.width-19 {
+    width: 19%; /* score-bar width set to 19% */
+}
+
+.width-20 {
+    width: 20%; /* score-bar width set to 20% */
+}
+
+.width-21 {
+    width: 21%; /* score-bar width set to 21% */
+}
+
+.width-22 {
+    width: 22%; /* score-bar width set to 22% */
+}
+
+.width-23 {
+    width: 23%; /* score-bar width set to 23% */
+}
+
+.width-24 {
+    width: 24%; /* score-bar width set to 24% */
+}
+
+.width-25 {
+    width: 25%; /* score-bar width set to 25% */
+}
+
+.width-26 {
+    width: 26%; /* score-bar width set to 26% */
+}
+
+.width-27 {
+    width: 27%; /* score-bar width set to 27% */
+}
+
+.width-28 {
+    width: 28%; /* score-bar width set to 28% */
+}
+
+.width-29 {
+    width: 29%; /* score-bar width set to 29% */
+}
+
+.width-30 {
+    width: 30%; /* score-bar width set to 30% */
+}
+
+.width-31 {
+    width: 31%; /* score-bar width set to 31% */
+}
+
+.width-32 {
+    width: 32%; /* score-bar width set to 32% */
+}
+
+.width-33 {
+    width: 33%; /* score-bar width set to 33% */
+}
+
+.width-34 {
+    width: 34%; /* score-bar width set to 34% */
+}
+
+.width-35 {
+    width: 35%; /* score-bar width set to 35% */
+}
+
+.width-36 {
+    width: 36%; /* score-bar width set to 36% */
+}
+
+.width-37 {
+    width: 37%; /* score-bar width set to 37% */
+}
+
+.width-38 {
+    width: 38%; /* score-bar width set to 38% */
+}
+
+.width-39 {
+    width: 39%; /* score-bar width set to 39% */
+}
+
+.width-40 {
+    width: 40%; /* score-bar width set to 40% */
+}
+
+.width-41 {
+    width: 41%; /* score-bar width set to 41% */
+}
+
+.width-42 {
+    width: 42%; /* score-bar width set to 42% */
+}
+
+.width-43 {
+    width: 43%; /* score-bar width set to 43% */
+}
+
+.width-44 {
+    width: 44%; /* score-bar width set to 44% */
+}
+
+.width-45 {
+    width: 45%; /* score-bar width set to 45% */
+}
+
+.width-46 {
+    width: 46%; /* score-bar width set to 46% */
+}
+
+.width-47 {
+    width: 47%; /* score-bar width set to 47% */
+}
+
+.width-48 {
+    width: 48%; /* score-bar width set to 48% */
+}
+
+.width-49 {
+    width: 49%; /* score-bar width set to 49% */
+}
+
+.width-50 {
+    width: 50%; /* score-bar width set to 50% */
+}
+
+.width-51 {
+    width: 51%; /* score-bar width set to 51% */
+}
+
+.width-52 {
+    width: 52%; /* score-bar width set to 52% */
+}
+
+.width-53 {
+    width: 53%; /* score-bar width set to 53% */
+}
+
+.width-54 {
+    width: 54%; /* score-bar width set to 54% */
+}
+
+.width-55 {
+    width: 55%; /* score-bar width set to 55% */
+}
+
+.width-56 {
+    width: 56%; /* score-bar width set to 56% */
+}
+
+.width-57 {
+    width: 57%; /* score-bar width set to 57% */
+}
+
+.width-58 {
+    width: 58%; /* score-bar width set to 58% */
+}
+
+.width-59 {
+    width: 59%; /* score-bar width set to 59% */
+}
+
+.width-60 {
+    width: 60%; /* score-bar width set to 60% */
+}
+
+.width-61 {
+    width: 61%; /* score-bar width set to 61% */
+}
+
+.width-62 {
+    width: 62%; /* score-bar width set to 62% */
+}
+
+.width-63 {
+    width: 63%; /* score-bar width set to 63% */
+}
+
+.width-64 {
+    width: 64%; /* score-bar width set to 64% */
+}
+
+.width-65 {
+    width: 65%; /* score-bar width set to 65% */
+}
+
+.width-66 {
+    width: 66%; /* score-bar width set to 66% */
+}
+
+.width-67 {
+    width: 67%; /* score-bar width set to 67% */
+}
+
+.width-68 {
+    width: 68%; /* score-bar width set to 68% */
+}
+
+.width-69 {
+    width: 69%; /* score-bar width set to 69% */
+}
+
+.width-70 {
+    width: 70%; /* score-bar width set to 70% */
+}
+
+.width-71 {
+    width: 71%; /* score-bar width set to 71% */
+}
+
+.width-72 {
+    width: 72%; /* score-bar width set to 72% */
+}
+
+.width-73 {
+    width: 73%; /* score-bar width set to 73% */
+}
+
+.width-74 {
+    width: 74%; /* score-bar width set to 74% */
+}
+
+.width-75 {
+    width: 75%; /* score-bar width set to 75% */
+}
+
+.width-76 {
+    width: 76%; /* score-bar width set to 76% */
+}
+
+.width-77 {
+    width: 77%; /* score-bar width set to 77% */
+}
+
+.width-78 {
+    width: 78%; /* score-bar width set to 78% */
+}
+
+.width-79 {
+    width: 79%; /* score-bar width set to 79% */
+}
+
+.width-80 {
+    width: 80%; /* score-bar width set to 80% */
+}
+
+.width-81 {
+    width: 81%; /* score-bar width set to 81% */
+}
+
+.width-82 {
+    width: 82%; /* score-bar width set to 82% */
+}
+
+.width-83 {
+    width: 83%; /* score-bar width set to 83% */
+}
+
+.width-84 {
+    width: 84%; /* score-bar width set to 84% */
+}
+
+.width-85 {
+    width: 85%; /* score-bar width set to 85% */
+}
+
+.width-86 {
+    width: 86%; /* score-bar width set to 86% */
+}
+
+.width-87 {
+    width: 87%; /* score-bar width set to 87% */
+}
+
+.width-88 {
+    width: 88%; /* score-bar width set to 88% */
+}
+
+.width-89 {
+    width: 89%; /* score-bar width set to 89% */
+}
+
+.width-90 {
+    width: 90%; /* score-bar width set to 90% */
+}
+
+.width-91 {
+    width: 91%; /* score-bar width set to 91% */
+}
+
+.width-92 {
+    width: 92%; /* score-bar width set to 92% */
+}
+
+.width-93 {
+    width: 93%; /* score-bar width set to 93% */
+}
+
+.width-94 {
+    width: 94%; /* score-bar width set to 94% */
+}
+
+.width-95 {
+    width: 95%; /* score-bar width set to 95% */
+}
+
+.width-96 {
+    width: 96%; /* score-bar width set to 96% */
+}
+
+.width-97 {
+    width: 97%; /* score-bar width set to 97% */
+}
+
+.width-98 {
+    width: 98%; /* score-bar width set to 98% */
+}
+
+.width-99 {
+    width: 99%; /* score-bar width set to 99% */
+}
+
+.width-100 {
+    width: 100%; /* score-bar width set to 100% */
+}

@@ -30,7 +30,7 @@
           <tr>
               <td>{{ category.name }}</td>
               <td>
-                  <div class="score-bar category-{{ loop.index }} width-{{ category.score_out_of_10 | round(0) | int }}">
+                  <div class="score-bar category-{{ loop.index }} width-{{ (category.score_out_of_10*10) | round(1) | int }}">
                         {% if category.score_out_of_10 | round(1) != 0.0 %}
                             {{ category.score_out_of_10 | round(1) }}
                         {% else %}
@@ -41,7 +41,7 @@
 
             {% if base_data %}
                 <td>
-                    <div class="score-bar category-{{ loop.index }} width-{{ base_data.categories[loop.index - 1].score_out_of_10 | round(0) | int }}">
+                    <div class="score-bar category-{{ loop.index }} width-{{ (base_data.categories[loop.index - 1].score_out_of_10*10) | round(1) | int }}">
                         {% if base_data.categories[loop.index - 1].score_out_of_10 | round(1) != 0.0 %}
                             {{ base_data.categories[loop.index - 1].score_out_of_10 | round(1) }}
                         {% else %}

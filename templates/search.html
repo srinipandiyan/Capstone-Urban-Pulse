@@ -2,17 +2,15 @@
 
 {% block stylesheets %}
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='search.css') }}">
 
 {% endblock %}
 
 {% block content %}
 
-<div class="container">
-  <div class="search-container">
-	  <input type="text" name="cities" id="cities" placeholder="Search Urban Areas">
-   <!-- <button id="submit-button">Search</button> --> 
+<div class="drum">
+  <div class="search-drum">
+	  <input type="text" name="cities" id="cities" placeholder="Search Urban Areas 🔎">
 	  <div class="suggestions">
 		  <ul></ul>
 	  </div>
