@@ -1,0 +1,22 @@
+body {
+    background-image: url(../img/workspace.jpg);
+    background-size: cover;
+}
+
+
+#login-container {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: white;
+    margin-top: 195px;
+    margin-left: 40px;
+}
+
+.join-message {
+    font-size: 24px;
+}
+
+.form-control {
+    opacity: 0.85;
+}
