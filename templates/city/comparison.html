@@ -8,70 +8,75 @@
 {% block content %}
 
 <div class="container">
-  <h1>City Scores for {{ name }}</h1>
-  
-  <button id="base-city-button" class='btn {{ "btn-outline-danger" if base_btn_state == "Remove Base City" else "btn-secondary" }}'>{{ base_btn_state }}</button>
-  <button id="favorite-button" class='btn {{ "btn-outline-warning" if fav_btn_state == "Unfavorite" else "btn-primary" }}'>{{ fav_btn_state }}</button>
-  
-  <p>{{ data.summary | safe }}</p>
+    <div class="intro">
+        
+        <h1>{{ name }}</h1>
 
-  <table class="table table-striped">
-      <thead>
-          <tr>
-              <th>Category</th>
-              <th>Score (out of 10)</th>
-            {% if base_name %}
-                <th> {{ base_name }} (out of 10)</th>
-            {% endif %}
-          </tr>
-      </thead>
-      <tbody>
-        {% for category in data.categories %}
-          <tr>
-              <td>{{ category.name }}</td>
-              <td>
-                  <div class="score-bar category-{{ loop.index }} width-{{ (category.score_out_of_10*10) | round(1) | int }}">
-                        {% if category.score_out_of_10 | round(1) != 0.0 %}
-                            {{ category.score_out_of_10 | round(1) }}
-                        {% else %}
-                            N/A
-                        {% endif %}
-                  </div>
-              </td>
+        <button id="base-city-button" class='btn {{ "btn-outline-danger" if base_btn_state == "Remove Base City" else "btn-secondary" }}'>{{ base_btn_state }}</button>
+        <button id="favorite-button" class='btn {{ "btn-outline-warning" if fav_btn_state == "Unfavorite" else "btn-primary" }}'>{{ fav_btn_state }}</button>
 
-            {% if base_data %}
+        <p>{{ data.summary | safe }}</p>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Score (out of 10)</th>
+                {% if base_name %}
+                    <th> {{ base_name }} (out of 10)</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in data.categories %}
+            <tr>
+                <td>{{ category.name }}</td>
                 <td>
-                    <div class="score-bar category-{{ loop.index }} width-{{ (base_data.categories[loop.index - 1].score_out_of_10*10) | round(1) | int }}">
-                        {% if base_data.categories[loop.index - 1].score_out_of_10 | round(1) != 0.0 %}
-                            {{ base_data.categories[loop.index - 1].score_out_of_10 | round(1) }}
-                        {% else %}
-                            N/A
-                        {% endif %}
+                    <div class="score-bar category-{{ loop.index }} width-{{ (category.score_out_of_10*10) | round(1) | int }}">
+                            {% if category.score_out_of_10 | round(1) != 0.0 %}
+                                {{ category.score_out_of_10 | round(1) }}
+                            {% else %}
+                                N/A
+                            {% endif %}
                     </div>
                 </td>
-            {% endif %}
-          </tr>
-        {% endfor %}
-      </tbody>
-  </table>
 
-    <div>
-            <p>
-                The Total City Score for {{ name }} is 
-                <b>{{ data.teleport_city_score | int }}</b>.
-            </p>
+                {% if base_data %}
+                    <td>
+                        <div class="score-bar category-{{ loop.index }} width-{{ (base_data.categories[loop.index - 1].score_out_of_10*10) | round(1) | int }}">
+                            {% if base_data.categories[loop.index - 1].score_out_of_10 | round(1) != 0.0 %}
+                                {{ base_data.categories[loop.index - 1].score_out_of_10 | round(1) }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </div>
+                    </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="summary">
+         <p>
+            {{ name }} scores 
+            <b>{{ data.teleport_city_score | int }}</b> points.
+        </p>
+
+
         {% if base_name %}
             <p>
-                For {{ base_name }}, your Base City Total Score is 
-                <b>{{ base_data.teleport_city_score | int }}</b>.
+                {{base_name}}, your base city, scores
+                <b>{{ base_data.teleport_city_score | int }}</b> points.
             </p>
-
-            <p>In comparison, these cities differ by <b>
-                {{ ( data.teleport_city_score | int - base_data.teleport_city_score | int ) }}
-            </b> points.</p>
+  
+            <p> The difference in scores between these areas is
+                <b>{{ ( data.teleport_city_score | int - base_data.teleport_city_score | int ) }}</b> points.
+            </p>
         {% endif %}
+
     </div>
-   
 </div>
 
 <script  src="{{ url_for('static', filename='comparison.js') }}"></script>
