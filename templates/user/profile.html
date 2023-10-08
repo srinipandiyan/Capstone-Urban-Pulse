@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
 
+{% block stylesheets %}<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">{% endblock %}
+
 {% block content %}
 
-<div class="text-center">
+<div id="profile-container" class="text-center">
     <h2 class="mt-3">{{g.user.username.capitalize()}}, welcome to your profile!</h2>
 
     <a href="/city/favorites" class="btn btn-info mt-2">Explore</a>
     
-    <ul class="list-group mt-3">
+    <ul id="favorites-heading" class="list-group mt-3">
         <h5 class="mt-6">Favorite Cities</h5>
         {% for favorite in favorites %}
                 <li class="list-group-item">
@@ -16,7 +18,7 @@
         {% endfor %}
     </ul><br>
 
-    <ul class="list-group mt-3">
+    <ul id="base-heading" class="list-group mt-3">
         {% if base_city %}
             <h5 class="mt-6">Base City</h5>
                 <li class="list-group-item">

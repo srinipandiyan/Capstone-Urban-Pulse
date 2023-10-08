@@ -1,0 +1,21 @@
+body {
+    background-image: url(../img/sky.jpg);
+    background-size: cover;
+}
+
+#profile-container {
+    color:rgb(125, 125, 125, 0.95);
+}
+
+#favorites-heading,
+#base-heading {
+  background-color: transparent;
+}
+
+#favorites-heading > li {
+    background-color: rgba(210, 199, 106, 0.07);
+}
+
+#base-heading > li {
+    background-color: rgba(183, 160, 216, 0.07);
+}
