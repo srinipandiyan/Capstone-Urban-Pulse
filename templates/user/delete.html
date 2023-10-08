@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
+{% block stylesheets %}<link rel="stylesheet" href="{{ url_for('static', filename='css/delete.css') }}">{% endblock %}
+
 {% block content %}
 
-<div class="row justify-content-md-center">
+<div id="delete-container" class="row justify-content-md-center">
   <div class="col-md-4">
-    <h2 class="join-message">Delete Profile.</h2>
+    <h2 class="join-message text">Delete Profile.</h2>
+    <br>
     <form method="POST" id="delete_form">
       {{ form.hidden_tag() }}
 
@@ -15,7 +18,8 @@
         {{ field(placeholder=field.label.text, class="form-control") }}
       {% endfor %}
 
-      <p>To confirm changes, enter your password:</p>
+      <p class="text">To confirm changes, enter your password:</p>
+    
       {% if form.password.errors %}
         {% for error in form.password.errors %}
           <span class="text-danger">
@@ -24,10 +28,9 @@
         {% endfor %}
       {% endif %}
       {{ form.password(placeholder="Enter your password to confirm", class="form-control") }}
-      <br>
         <div class="edit-btn-area">
-          <a href="/user" class="btn btn-outline-primary">Cancel</a>
-          <button class="btn btn-outline-danger">Delete</button>
+          <a href="/user" class="btn btn-primary">Cancel</a>
+          <button class="btn btn-danger">Delete</button>
         </div>
     </form>
   </div>

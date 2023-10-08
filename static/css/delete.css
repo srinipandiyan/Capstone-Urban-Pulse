@@ -1,0 +1,30 @@
+body {
+    background-image: url(../img/van.jpg);
+    background-size: cover;
+}
+
+#delete-container {
+    background-color: rgba(171, 204, 247, 0.4);
+    font-size: larger;
+    margin: 2% 15%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-radius: 25px;
+}
+
+.text {
+    background-color: rgba(165, 193, 235, 0.50);
+    border-radius: 15px;
+    margin: 2px;
+    padding: 2px;
+    color: rgba(42, 42, 42, 0.90);
+}
+
+.form-control {
+    opacity: 0.85;
+    padding: 20px;
+}
+
+.btn {
+    opacity: 0.95;
+}

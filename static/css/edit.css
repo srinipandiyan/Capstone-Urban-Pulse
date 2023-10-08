@@ -1,0 +1,29 @@
+body {
+    background-image: url(../img/mosaic.jpg);
+    background-size: cover;
+}
+
+#edit-container {
+    background-color: rgba(255, 228, 196, 0.50);
+    font-size: larger;
+    margin: 3% 15%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    border-radius: 25px;
+}
+
+.text {
+    background-color: rgba(253, 229, 200, 0.45);
+    border-radius: 15px;
+    margin: 2px;
+    padding: 2px;
+    color: rgba(0, 0, 0, 0.90);
+}
+
+.form-control {
+    opacity: 0.85;
+}
+
+.btn {
+    opacity: 0.95;
+}

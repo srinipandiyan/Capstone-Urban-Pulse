@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
+{% block stylesheets %}<link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}">{% endblock %}
+
 {% block content %}
 
-<div class="row justify-content-md-center">
+<div id="edit-container"class="row justify-content-md-center">
   <div class="col-md-4">
-    <h2 class="join-message">Edit Your Profile.</h2>
+    <h2 class="join-message text">Edit Your Profile.</h2>
     <form method="POST" id="profile_form">
       {{ form.hidden_tag() }}
 
@@ -15,7 +17,7 @@
         {{ field(placeholder=field.label.text, class="form-control") }}
       {% endfor %}
       <br>
-      <p>To confirm changes, enter your password:</p>
+      <p class="text">To confirm changes, enter your password:</p>
       {% if form.password.errors %}
         {% for error in form.password.errors %}
           <span class="text-danger">
@@ -26,8 +28,8 @@
       {{ form.password(placeholder="Enter your password to confirm", class="form-control") }}
       <br>
         <div class="edit-btn-area">
-          <button class="btn btn-outline-success">Edit</button>
-          <a href="/user" class="btn btn-outline-danger">Cancel</a>
+          <button class="btn btn-success">Edit</button>
+          <a href="/user" class="btn btn-danger">Cancel</a>
         </div>
     </form>
   </div>
