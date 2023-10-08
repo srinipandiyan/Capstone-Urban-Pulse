@@ -1,33 +1,36 @@
-/* Score bars styling */
 body {
-    background-image: url(arch.jpg);
+    background-image: url(photos/arch.jpg);
     background-size: cover;
    
 }
+
+/*Intro section styling */
 .intro {
     color: white;
     font-size: 16px;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
+/*Table section styling */
 .table {
     background-color: rgba(220, 220, 220, 0.70);
 }
 
+/*Summary section styling */
 .summary {
     color: white;
     font-size: 18px;
-    background: radial-gradient(circle, rgba(34,195,173,0.35) 0%, rgba(253,187,45,0.25) 100%);
+    background: radial-gradient(circle, rgba(34,195,173,0.70) 0%, rgba(253,187,45,0.25) 100%);
     padding: 3%;
     margin: 4% 0%;
     border-radius: 40px;
     align-items: center;
     justify-content: center;
     text-align: center;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
-
+/* Score bars styling */
 .score-bar {
     height: 22px;
     border-radius: 3px;
