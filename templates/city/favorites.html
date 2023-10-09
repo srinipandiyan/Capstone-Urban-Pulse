@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
 
+{% block stylesheets %}<link rel="stylesheet" href="{{ url_for('static', filename='css/favorites.css') }}">{% endblock %}
+
 {% block content %}
 <div class="text-center">
-    <h2 class="mt-3">Here are your favorite urban areas!</h2>
+    <h2 class="text mt-3">Here are your favorite urban areas!</h2>
 </div>
-    {{for photo in city_photos}}
-    <div>
 
+<div class="container mt-4">
+    <div>
+        {% for favorite in favorites %}
+        <div class="col-md-4 mb-4">
+            <div class="city-card">
+                <a href="/{{ favorite.city_id }}">
+                    <img src="{{ city_photos[favorite.city_id] }}" alt="photo of {{ favorite.city_id}}.">
+                    <h5 class="city-name">{{ favorite.city_id.capitalize() }}</h5>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {{ endfor}}
+</div>
 
 {% endblock %}
