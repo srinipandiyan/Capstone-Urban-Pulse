@@ -8,13 +8,14 @@ import requests
 from forms import UserAddForm, LoginForm, UpdateUserForm, DeleteUserForm
 from models import db, connect_db, User, City, FavoritedCity
 from urban import valid_cities, valid_ua_ids
+from secret import SECRET_KEY
 
 CURR_USER_KEY = "curr_user"
 
 app = Flask(__name__)
 app.app_context().push()
 
-app.config['SECRET_KEY'] = "twin-cherries-eat-sunri2e"
+app.config['SECRET_KEY'] = SECRET_KEY
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///urban_pulse'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
