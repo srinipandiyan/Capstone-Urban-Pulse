@@ -5,6 +5,7 @@ body {
 
 #profile-container {
     color:rgb(125, 125, 125, 0.95);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 #favorites-heading,

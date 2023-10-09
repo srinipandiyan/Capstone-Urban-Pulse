@@ -1,13 +1,12 @@
 """Flask app for Urban Pulse"""
 
-from flask import Flask, render_template, flash, redirect, abort, request, session, g
+from flask import Flask, render_template, flash, redirect, request, session, g
 from flask_debugtoolbar import DebugToolbarExtension
 from sqlalchemy.exc import IntegrityError
 import requests
 
 from forms import UserAddForm, LoginForm, UpdateUserForm, DeleteUserForm
 from models import db, connect_db, User, City, FavoritedCity
-
 from urban import valid_cities, valid_ua_ids
 
 CURR_USER_KEY = "curr_user"
@@ -464,8 +463,20 @@ def handle_favorite():
 
 @app.route('/city/favorites')
 def render_favorite_cities():
-     """Render favorite urban areas from within user profile."""
-     return render_template('city/favorites.html')
+    """Render favorite urban areas from within user profile."""
+    #get user favorites 
+    favorites = FavoritedCity.query.filter_by(user_id=g.user.id).all()
+
+    #extract all city ids from favorites
+    city_ids = [favorite.city_id for favorite in favorites]
+
+    #fetch city data from City model
+    cities = City.query.filter(City.id.in_(city_ids)).all()
+
+    #create dictionary to map city ids to city photos
+    city_photos = {city.id: city.photo for city in cities}
+
+    return render_template('city/favorites.html', favorites=city_ids, city_photos=city_photos)
 
 
 @app.route('/basecity', methods=["POST"])

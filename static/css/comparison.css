@@ -1,6 +1,7 @@
 body {
     background-image: url(../img/arch.jpg);
     background-size: cover;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 /*Intro section styling */
@@ -18,7 +19,7 @@ body {
 /*Summary section styling */
 .summary {
     color: white;
-    font-size: 18px;
+    font-size: 16px;
     background: radial-gradient(circle, rgba(34,195,173,0.70) 0%, rgba(253,187,45,0.25) 100%);
     padding: 3%;
     margin: 4% 0%;
@@ -32,11 +33,12 @@ body {
 /* Score bars styling */
 .score-bar {
     height: 22px;
+    font-size: 12px;
     border-radius: 3px;
     margin: 3px 0px;
+    padding: 2px;
     color: white;
     text-align: left;
-    padding: 2px;
 }
 
 /* Category-specific colors */
