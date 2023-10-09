@@ -1,4 +1,4 @@
-# Capstone-City-Comparison-Tool
+# Capstone-Urban Pulse
 
 The City Comparison Tool is a practical and useful interface for users considering traveling, moving, or relocating to different US cities. The app will provide valuable metrics for ease-of-comparison among cities, such as quality of life, commutability, safety, among others. This kind of app can be highly beneficial for individuals looking to make informed decisions about their next destination. The target demographic includes students, potential home-buyers, and professionals seeking to move cities.
 
