@@ -14,16 +14,15 @@ CURR_USER_KEY = "curr_user"
 app = Flask(__name__)
 app.app_context().push()
 
-app.config['SECRET_KEY'] = "oh-so-secret"
+app.config['SECRET_KEY'] = "twin-cherries-eat-sunri2e"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///urban_pulse'
-#uncomment in production
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# set all to false for production/remove echo
-app.config['SQLALCHEMY_ECHO'] = True
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+
+#app.config['SQLALCHEMY_ECHO'] = True
 # Use shell command to turn on debug mode.
 # $ export FLASK_DEBUG=1 && flask run
-toolbar = DebugToolbarExtension(app)
+#toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 db.create_all()
