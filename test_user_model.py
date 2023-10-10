@@ -92,6 +92,36 @@ class UserModelTestCase(TestCase):
         with self.assertRaises(exc.IntegrityError) as context:
             db.session.commit()
 
+    def test_user_edit(self):
+        """User edit form successfully accesses and modifies existing user model"""
+
+        edit_user_1 = User.query.get(self.uid_1)
+        edit_user_1.username = "edit"
+        edit_user_1.email = "edit@email.org"
+        
+        db.session.add(edit_user_1)
+        db.session.commit()
+
+        #test whether user_1's user model contains the updated attributes
+        u_edit_test = User.query.get(self.uid_1)
+        self.assertIsNotNone(u_edit_test)
+        self.assertEqual(u_edit_test.username, "edit")
+        self.assertEqual(u_edit_test.email, "edit@email.org")
+
+
+    
+    def test_user_edit_fail(self):
+        """User edit form unsuccessfully accesses and fails to modify existing user model given invalid attribute datatypes"""
+
+        edit_user_2 = User.query.get(self.uid_2)
+        edit_user_2.username = None
+        edit_user_2.email = None
+        
+        db.session.add(edit_user_2)
+
+        with self.assertRaises(exc.IntegrityError) as context:
+            db.session.commit()
+
     def test_authenticate(self):
         """User authenticate method successfully returns a user given valid username and password credentials"""
 
