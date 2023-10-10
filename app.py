@@ -23,7 +23,7 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 #app.config['SQLALCHEMY_ECHO'] = True
 # Use shell command to turn on debug mode.
 # $ export FLASK_DEBUG=1 && flask run
-#toolbar = DebugToolbarExtension(app)
+toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 db.create_all()
