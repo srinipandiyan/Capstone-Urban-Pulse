@@ -1,14 +1,38 @@
-# Capstone-City-Comparison-Tool
+# Urban Pulse - Capstone
 
-The City Comparison Tool is a practical and useful interface for users considering traveling, moving, or relocating to different US cities. The app will provide valuable metrics for ease-of-comparison among cities, such as quality of life, commutability, safety, among others. This kind of app can be highly beneficial for individuals looking to make informed decisions about their next destination. The target demographic includes students, potential home-buyers, and professionals seeking to move cities.
+## Overview
+[Urban Pulse](https://urbanpulse.onrender.com) is a web application designed to assist users in making informed decisions regarding traveling, moving, or relocating to urban areas across the world. We aim to provide valuable metrics for ease-of-comparison among cities, such as cost-of-living, education, safety, and more. The target demographic includes students, potential home-buyers, and professionals seeking to relocate.
 
-The City Comparison Tool will rely on Teleport’s computed aggregate scores for urban areas. At present, the API provides scores for the following categories: “housing, cost of living, startups, venture capital, travel connectivity, commute, business freedom, safety, healthcare, education, environmental quality, economy, taxation and internet access”. Teleport additionally provides native access to photos of urban areas within their API, which enhances functionality when implemented alongside city metrics.
+## Features
+Here are the key features implemented by Urban Pulse:
+- **City Pulse**: Users can search our databases for cities and view a city reference page.
+- **Comparison Report**: Users can set a base city and have a comparison report added to the city pulse.
+- **User Profile**: Users' preferences, such as favorites, are saved for future reference in their profile.
+- **Photo View**: Users can visually explore favorite cities through photo-immersion (because a photo is worth a 1000 words).
+- **Teleport API Integration**: Urban area scores and data are fetched using Teleport's API.
+- **Dynamic UI**: JavaScript and Bootstrap create an interactive user interface.
 
-The approach to building the City Comparison Tool will be as follows. The backend with Flask and Jinja will be used to build the routes and HTML that the user can navigate to. 
-API data is displayed using Jinja and HTML and called using Flask GET requests. Potential API issues may include data inconsistencies or changes to the API structure over time. These should be tested for regularly using unit testing and GET requests should be updated if errors are thrown. From there, SQLAlchemy will be used to generate a PostgreSQL database containing user data, including saved home or favorite cities, as well as the most sensitive information: username and hashed password combinations. Finally, the front-end will be stylized and made dynamic with Bootstrap and JavaScript, respectively, to create the core of the user interface. 
+## Technology Stack
+Urban Pulse deploys the following technologies:
+- **Frontend**: JavaScript, HTML, CSS, and Bootstrap.
+- **Backend**: Python, Flask with Jinja for routing and HTML rendering, Flask-WTForms for form creation, and Gunicorn as the production-ready HTTP server.
+- **Database**: SQLAlchemy with PostgreSQL to store user and city data.
 
-The app will have critical functionality related to city search, metric selection, and comparison reports. The user flow will go hand-in-hand with functionality and appear as follows. The user lands on the homepage to a search bar and is allowed to select cities for comparison or select among pre-defined cities. The user is allowed to toggle on and off desired metrics before comparing cities. Once complete, the user will be shown a page with a comparison report of the various cities and metrics selected. Lastly, the user will have the option to form a profile and save preferences for future reference. 
+## Standard User Flow
+Here's a step-by-step walkthrough of the standard user flow for Urban Pulse:
+1. **Homepage**: Users land on the homepage and are prompted to sign-up or login.
+2. **Search**: Users are redirected to a search bar and can query urban areas in our databases.
+3. **City Pulse Report**: After selecting a city, users are presented with a city pulse report containing a city summary and scores for 15+ metrics in a comparison report.
+   - Favorite OR Set Base City: Users can add/remove a city to favorites or set it as the base city.
+4. **User Profile**: Users can view and update their profile, including user credentials, favorites, and base city.
+   - Photo View: Users can view photos of their favorite cities.
 
-The premise of the app largely contains features which utilize CRUD principles. As such, appropriate stretch goals could expand app features to be “more than CRUD”. One such feature would utilize News’ API to integrate web URLs of local news articles among selected cities for use in the comparison report. Another stretch feature would generate a small-scale city recommendation algorithm based on saved user preferences with content-based filtering.
+## API Integration
+Urban Pulse relies on [Teleport's API](https://developers.teleport.org/api/) to fetch urban area metrics.
 
-API: https://developers.teleport.org/api/
+## Additional Notes
+Future enhancements could include integrating local news articles using a news API for selected cities in the comparison report. A stretch goal is to implement a city recommendation algorithm based on user preferences using content-based filtering.
+
+Feel free to explore the codebase and contribute to the project. Suggestions, bug reports, or feature requests are welcome anytime!
+
+I hope you find Urban Pulse a valuable and user-friendly tool for exploring different global locales. If you have any questions or feedback, please don't hesitate to reach out.
