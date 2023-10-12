@@ -269,12 +269,15 @@ const cities = [
  * match characters in str to characters in elements of cities array
  * @param {string} results - filter cities array for chars in search query str
  */
-function search(str) {
-	const results = [];
-	//filter cities array for str and append to results if true; else append an empty ''
-	cities.filter(val => val.toLowerCase().includes(str) ? results.push(val) : null);
-	//return results array
-	return results
+ function search(str) {
+   	//if city in cities array starts with query str, append to results the startsWith array.
+    const startsWith = cities.filter(city => city.toLowerCase().startsWith(str));
+    //if city in cities array includes but does not start with the query str, append to the includes array.
+    const includes = cities.filter(city => city.toLowerCase().includes(str) && !startsWith.includes(city));
+    //concatenate startsWith and includes array into one 
+    const results = startsWith.concat(includes);
+    //return results array with cities that start with and include the query str.
+    return results;
 }
 
 //event handler that returns search bar inputs matched to cities array
@@ -294,13 +297,13 @@ function searchHandler(e) {
 function showSuggestions(results) {
 	// innerText default will clear suggestions
 	suggestions.innerText = "";
-	//userinput to display suggestions upon user keyup events
-	if (results.length > 0){
-		//displays abbreviated results--up to first five elements
-		for (let i = 0; i < results.length && i < 10; i++){
+	//user input displays suggestions upon user keyup events
+	if (results.length > 0) {
+		//displays abbreviated and scrollable results
+		for (let i = 0; i < results.length & i < 20; i++){
 			//created new list item element
 			const newLi = document.createElement("li");
-			//innerText of <li> set to index item in results array
+			//innerText of <li> set to index item within results array
 			newLi.innerText = results[i];
 			//list item element appended to suggestions
 			suggestions.appendChild(newLi);
@@ -321,6 +324,7 @@ function toggleHighlight(e){
     }
 }
 
+//use suggestion as output and reset suggestions
 function useSuggestion(e) {
 	//click to access city suggestion value
 	cityVal = e.target.innerText;
@@ -330,7 +334,7 @@ function useSuggestion(e) {
 	suggestions.innerText = "";
 }
 
-//function to handle form submission
+//handle form submission
 function handleSubmit() {
     const selectedCity = input.value;
 
@@ -343,22 +347,33 @@ function handleSubmit() {
                 //handle other response statuses (404).
                 console.log("Request failed with status: " + response.status);
             }
-        })
+        }
+    )
 }
 
-//function to handle form submission via enter keyup
+//handle form submission via enter keyup
 function handleEnter(event) {
     if (event.key === 'Enter'){
-        handleSubmit();
-    };
+        const firstSuggestion = suggestions.querySelector('li');
+            if (firstSuggestion) {
+                //set the input value to the first suggestion
+                input.value = firstSuggestion.innerText;
+                //clear existing suggestions
+                suggestions.innerText = "";
+                //handle search
+                handleSubmit();
+            } else {
+                //if there are no suggestions, then clear the search bar
+                input.value = "";
+                return;
+        }
+    }
 }
 
 //keyup event listener for search bar inputs
 input.addEventListener('keyup', searchHandler);
-
 //enter keyup event listener for search bar
-//input.addEventListener('keyup', handleEnter);
-
+input.addEventListener('keyup', handleEnter);
 //mouseover event listener for highlighting suggestions
 suggestions.addEventListener('mouseover', toggleHighlight);
 //mouseout event listener for unhighlighting suggestions
@@ -368,5 +383,5 @@ suggestions.addEventListener('click', useSuggestion);
 //click event for autcomplete suggestions
 suggestions.addEventListener('click', handleSubmit);
 
-//click event listener for the submit button
+//click event listener for an optional submit button
 //submitButton.addEventListener('click', handleSubmit);
