@@ -20,15 +20,15 @@
   <ul class="navbar-nav ml-auto">
     {% if g.user %}
             <!--display these links if the user is authenticated -->
-            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/user">Profile</a></li>
             <li class="nav-item"><a class="nav-link" href="/search">Search</a></li>
+            <li class="nav-item"><a class="nav-link" href="/user">Profile</a></li>
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
         {% else %}
             <!--display these links if the user is not authenticated -->
-              <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
               <li class="nav-item"><a class="nav-link" href="/signup">Signup</a></li>
               <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+              <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
         {% endif %}
   </ul>
 </nav>
