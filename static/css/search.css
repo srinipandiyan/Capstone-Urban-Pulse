@@ -43,6 +43,8 @@ body {
   opacity: 0.70;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: white;
+  max-height: 45vh;
+  overflow-y: auto;
 }
 
 .suggestions > ul > li {
