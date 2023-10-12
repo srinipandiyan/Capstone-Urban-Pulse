@@ -15,6 +15,14 @@ body {
     background-color: rgba(220, 220, 220, 0.70);
 }
 
+.category-header {
+    width: 20%;
+}
+
+.score-header {
+    width: 40%;
+}
+
 /*Summary section styling */
 .summary {
     color: white;
