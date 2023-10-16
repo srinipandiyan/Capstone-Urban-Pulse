@@ -14,7 +14,7 @@ Here are the key features implemented by Urban Pulse:
 
 ## Technology Stack
 Urban Pulse deploys the following technologies:
-- **Frontend**: JavaScript, HTML, CSS, and Bootstrap.
+- **Frontend**: JavaScript, HTML, CSS, jQuery, and Bootstrap.
 - **Backend**: Python, Flask with Jinja for routing and HTML rendering, Flask-WTForms for form creation, and Gunicorn as the production-ready HTTP server.
 - **Database**: SQLAlchemy with PostgreSQL to store user and city data.
 
