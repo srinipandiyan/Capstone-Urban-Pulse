@@ -108,5 +108,3 @@ class CityModelTestCase(TestCase):
 
         with self.assertRaises(exc.IntegrityError) as context:
             db.session.commit()
-
-    #do other two tests as above but try to modify existing city and see whether the error is thrown.

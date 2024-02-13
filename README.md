@@ -1,7 +1,7 @@
 # Urban Pulse - Capstone
 
 ## Overview
-[Urban Pulse](https://urbanpulse.onrender.com) is a web application designed to assist users in making informed decisions regarding traveling, moving, or relocating to urban areas across the world. We aim to provide valuable metrics for ease-of-comparison among cities, such as cost-of-living, education, safety, and more. The target demographic includes students, potential home-buyers, and professionals seeking to relocate. To run locally, install the requirements, create a db, and use the following commands start a flask server: `$flask run`.
+[Urban Pulse](https://urbanpulse.onrender.com) is a web application designed to assist users in making informed decisions regarding traveling, moving, or relocating to urban areas across the world. We aim to provide valuable metrics for ease-of-comparison among cities, such as cost-of-living, education, safety, and more. The target demographic includes students, potential home-buyers, and professionals seeking to relocate.
 
 ## Features
 Here are the key features implemented by Urban Pulse:
@@ -14,7 +14,7 @@ Here are the key features implemented by Urban Pulse:
 
 ## Technology Stack
 Urban Pulse deploys the following technologies:
-- **Frontend**: JavaScript, HTML, CSS, and Bootstrap.
+- **Frontend**: JavaScript, HTML, CSS, jQuery, and Bootstrap.
 - **Backend**: Python, Flask with Jinja for routing and HTML rendering, Flask-WTForms for form creation, and Gunicorn as the production-ready HTTP server.
 - **Database**: SQLAlchemy with PostgreSQL to store user and city data.
 
