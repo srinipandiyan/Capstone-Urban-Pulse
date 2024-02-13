@@ -28,7 +28,8 @@ Here's a step-by-step walkthrough of the standard user flow for Urban Pulse:
    - Photo View: Users can view photos of their favorite cities.
 
 ## API Integration
-Urban Pulse relies on [Teleport's API](https://developers.teleport.org/api/) to fetch urban area metrics.
+Urban Pulse relies on [Teleport's API](https://developers.teleport.org/api/) to fetch urban area metrics. 
+NOTE: Presently, Urban Pulse is looking for a new API as the previous API is no longer available!
 
 ## Additional Notes
 Future enhancements could include integrating local news articles using a news API for selected cities in the comparison report. A stretch goal is to implement a city recommendation algorithm based on user preferences using content-based filtering.
