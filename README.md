@@ -13,8 +13,8 @@ To run locally, create and activate a virtual environemnt & install the requirem
 
 To launch tests, run the following commands:
 ```shell
-$python -m unittest test_city_model.py
-$python -m unittest test_user_model.py
+$ python -m unittest test_city_model.py
+$ python -m unittest test_user_model.py
 ```
 ## Features
 Here are the key features implemented by Urban Pulse:
