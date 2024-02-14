@@ -1,8 +1,21 @@
 # Urban Pulse - Capstone
 
 ## Overview
-[Urban Pulse](https://urbanpulse.onrender.com) is a web application designed to assist users in making informed decisions regarding traveling, moving, or relocating to urban areas across the world. We aim to provide valuable metrics for ease-of-comparison among cities, such as cost-of-living, education, safety, and more. The target demographic includes students, potential home-buyers, and professionals seeking to relocate. To run locally, install the requirements.txt file, startup a PostgreSQL database, and launch the server with the following command: `flask run`.
+[Urban Pulse](https://urbanpulse.onrender.com) is a web application designed to assist users in making informed decisions regarding traveling, moving, or relocating to urban areas across the world. We aim to provide valuable metrics for ease-of-comparison among cities, such as cost-of-living, education, safety, and more. The target demographic includes students, potential home-buyers, and professionals seeking to relocate. 
 
+To run locally, create and activate a virtual environemnt & install the requirements.txt file, run the urban_pulse.sql file with Postgres, and launch the server with the following commands: 
+```shell
+ $ python3 -m venv venv && source venv/bin/activate
+ $ pip install -r requirements.txt
+ $ psql urban_pulse.sql
+ $ flask run
+```
+
+To launch tests, run the following commands:
+```shell
+$ python -m unittest test_city_model.py
+$ python -m unittest test_user_model.py
+```
 ## Features
 Here are the key features implemented by Urban Pulse:
 - **City Pulse**: Users can search our databases for cities and view a city reference page.
