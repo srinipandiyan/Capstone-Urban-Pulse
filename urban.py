@@ -1,3 +1,5 @@
+import requests
+
 valid_cities = [
     "Aarhus, Denmark",
     "Adelaide, Australia",
@@ -286,3 +288,134 @@ valid_ua_ids = ['aarhus', 'adelaide', 'albuquerque', 'almaty', 'amsterdam', 'anc
                 'the-hague', 'thessaloniki', 'tijuana', 'tokyo', 'toronto', 'toulouse', 'tucson', 'tulsa', 'turin', 'ulaanbaatar', 'valencia', 'valletta', 
                 'vancouver', 'venice', 'vienna', 'vientiane', 'vilnius', 'warsaw', 'washington-dc', 'wellington', 'winnipeg', 'wroclaw', 'yerevan', 
                 'zagreb', 'zurich']
+
+def get_ua_id(city):
+    """
+    Given city from autocomplete suggestion, convert city name to API callable urban area id (ua_id).
+    ua_id will have all chars in lowercase, country and punctuation removed, and spaces replaced with hypens (-).
+
+    parameters:
+        city (str): the user readable city name and location, for example: "San Francisco Bay Area, United States"
+
+    returns:
+        returns ua_id (str)
+    """
+
+    #split the city str by comma, retain the city name, replace any spaces with a hypen, and lowercase all chars.
+    city_name = city.split(',')
+    ua_id = city_name[0].strip().replace(' ', '-').lower()
+    return ua_id
+
+def get_city_scores(ua_id):
+    """
+    Given ua_id, call city scores from Teleport API for urban areas.
+    
+    parameters: 
+        ua_id (str): the urban area id of a city, for example: "san-francisco-bay-area".
+            arg must given in lowercase with any spaces replaced with hypens (-).
+        
+    returns:
+       if request == 200, returns a JSON dict object from the API.
+            else, returns NONE.
+    """
+    #API URL route for urban area scores
+    url = f"https://api.teleport.org/api/urban_areas/slug%3A{ua_id}/scores/"
+    #GET request
+    response = requests.get(url)
+    
+    #verify request was successful with status code 200
+    if response.status_code == 200:
+        #return parsed json response
+        return response.json()
+        
+    else:
+        #handle case where the request was unsuccessful
+        print(f"GET request failed: status code {response.status_code}")
+        return None
+    
+def get_city_photo(ua_id):
+    """
+    Given ua_id, get city image url from Teleport API for urban areas.
+    
+    parameters: 
+        ua_id (str): the urban area id of a city, for example: "san-francisco-bay-area".
+            arg must given in lowercase with any spaces replaced with hypens (-).
+        
+    returns:
+       if request == 200, returns a str from the API.
+            else, returns NONE.
+    """
+
+    #API URL route for urban area photo
+    url = f"https://api.teleport.org/api/urban_areas/slug%3A{ua_id}/images/"
+    #GET request
+    response = requests.get(url)
+    
+    #verify request was successful with status code 200
+    if response.status_code == 200:
+        #parse json response
+        data = response.json()
+        #access and return the web image URL from response
+        image_url = data['photos'][0]['image']['web']
+        return image_url
+        
+    else:
+        #handle case where the request was unsuccessful
+        print(f"GET request failed: status code {response.status_code}")
+        return None
+    
+def get_city_details(ua_id):
+    """
+    Given ua_id, get city details from Teleport API for urban area.
+    
+    parameters: 
+        ua_id (str): the urban area id of a city, for example: "san-francisco-bay-area".
+            arg must given in lowercase with any spaces replaced with hypens (-).
+        
+    returns:
+       if request == 200, returns a JSON dict object from the API.
+            else, returns NONE.
+    """
+
+    #API URL route for urban area details
+    url = f"https://api.teleport.org/api/urban_areas/slug%3A{ua_id}/details/"
+    #GET request
+    response = requests.get(url)
+
+    #verify request was successful with status code 200
+    if response.status_code == 200:
+        #return parsed json response
+        return response.json()
+        
+    else:
+        #handle case where the request was unsuccessful
+        print(f"GET request failed: status code {response.status_code}")
+        return None
+        
+def get_city_salaries(ua_id):
+    """
+    Given ua_id, call city salaries from Teleport API for occupations in urban areas.
+    
+    parameters: 
+        ua_id (str): the urban area id of a city, for example: "san-francisco-bay-area".
+            arg must given in lowercase with any spaces replaced with hypens (-).
+        
+    returns:
+       if request == 200, returns a JSON dict object from the API.
+            else, returns NONE.
+    """
+
+    #API URL route for urban area occupational salaries
+    url = f"https://api.teleport.org/api/urban_areas/slug%3A{ua_id}/salaries/"
+    #GET request
+    response = requests.get(url)
+    
+    #verify request was successful with status code 200
+    if response.status_code == 200:
+        #return parsed json response
+        return response.json()
+        
+    else:
+        #handle case where the request was unsuccessful
+        print(f"GET request failed: status code {response.status_code}")
+        return None
