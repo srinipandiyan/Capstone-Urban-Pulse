@@ -3,7 +3,7 @@
 ## Overview
 [Urban Pulse](https://urbanpulse.onrender.com) is a web application designed to assist users in making informed decisions regarding traveling, moving, or relocating to urban areas across the world. We aim to provide valuable metrics for ease-of-comparison among cities, such as cost-of-living, education, safety, and more. The target demographic includes students, potential home-buyers, and professionals seeking to relocate. 
 
-To run locally, create and activate a virtual environemnt & install the requirements.txt file, run the urban_pulse.sql file with Postgres, and launch the server with the following commands: 
+To run locally, create and activate a virtual environment & install the requirements.txt file, run the urban_pulse.sql file with Postgres, and launch the server with the following commands: 
 ```shell
  $ python3 -m venv venv && source venv/bin/activate
  $ pip install -r requirements.txt
