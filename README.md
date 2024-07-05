@@ -46,8 +46,18 @@ Urban Pulse relies on [Teleport's API](https://developers.teleport.org/api/) to 
 
 ## Photos from Application
 Here are photos displaying Urban Pulse's user interface
-Search Page with autocomplete functionality
-![search page of Urban Pulse]<img width="1440" alt="Search Page" src="https://github.com/srinipandiyan/Capstone-Urban-Pulse/assets/125408728/2cc201cb-1165-4b91-aa63-a2fb7769ed0e">
+
+ Search Page displaying autocomplete functionality
+ <img width="1440" alt="Search Page with autocomplete of Urban Pulse" src="https://github.com/srinipandiyan/Capstone-Urban-Pulse/assets/125408728/2cc201cb-1165-4b91-aa63-a2fb7769ed0e">
+ 
+ Comparison Page of Two Cities with dynamically fetched and rendered metrics
+ <img width="1440" alt="City Comparison of San Francisco and Aarhus" src="https://github.com/srinipandiyan/Capstone-Urban-Pulse/assets/125408728/6f7aacb1-778f-4a36-a098-c69354e601a1">
+ 
+ Solo City Stats Page
+ <img width="1440" alt="SF Bay Area-Solo stats " src="https://github.com/srinipandiyan/Capstone-Urban-Pulse/assets/125408728/e418e3f8-0752-4241-b810-208ab331813b">
+
+ User Profile Page of Favorites and Base City
+ <img width="1440" alt="Profile View of Favorites and Base City" src="https://github.com/srinipandiyan/Capstone-Urban-Pulse/assets/125408728/a4d639cc-5551-447c-ac02-a960f3371a5c">
 
 ## Additional Notes
 Future enhancements could include integrating local news articles using a news API for selected cities in the comparison report. A stretch goal is to implement a city recommendation algorithm based on user preferences using content-based filtering.
