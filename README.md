@@ -44,6 +44,11 @@ Here's a step-by-step walkthrough of the standard user flow for Urban Pulse:
 Urban Pulse relies on [Teleport's API](https://developers.teleport.org/api/) to fetch urban area metrics. 
 **NOTE: Presently, Urban Pulse is looking for a new API as the previous API is no longer available!**
 
+## Photos from Application
+Here are photos displaying Urban Pulse's user interface
+Search Page with autocomplete functionality
+![search page of Urban Pulse]<img width="1440" alt="Search Page" src="https://github.com/srinipandiyan/Capstone-Urban-Pulse/assets/125408728/2cc201cb-1165-4b91-aa63-a2fb7769ed0e">
+
 ## Additional Notes
 Future enhancements could include integrating local news articles using a news API for selected cities in the comparison report. A stretch goal is to implement a city recommendation algorithm based on user preferences using content-based filtering.
 
